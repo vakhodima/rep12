@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load i18n wger_extras %}
+
+{% block title %}Чек-ины — {{ client|format_username }}{% endblock %}
+
+{% block content %}
+
+{% if checkins %}
+<table class="table">
+<thead>
+<tr>
+    <th>Дата</th>
+    <th>Настроение</th>
+    <th>Энергия</th>
+    <th>Сон</th>
+    <th>Заметки</th>
+</tr>
+</thead>
+<tbody>
+{% for c in checkins %}
+<tr>
+    <td>{{ c.date }}</td>
+    <td>{{ c.get_mood_display }}</td>
+    <td>{{ c.energy }}/5</td>
+    <td>{{ c.sleep }}/5</td>
+    <td>{{ c.notes|default:"-" }}</td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+{% else %}
+<p class="text-muted">Клиент ещё не заполнял чек-ины.</p>
+{% endif %}
+
+{% endblock %}

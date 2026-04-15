@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}Чек-ин{% endblock %}
+
+{% block content %}
+
+{% if error %}
+<div class="alert alert-danger">{{ error }}</div>
+{% endif %}
+
+{% if existing %}
+<div class="alert alert-info">Вы уже заполняли чек-ин сегодня. Можете обновить.</div>
+{% endif %}
+
+<form method="post">
+    {% csrf_token %}
+
+    <div class="mb-3">
+        <label class="form-label fw-bold">Настроение</label>
+        <div class="d-flex gap-2">
+            {% for val, label in mood_choices %}
+            <label class="btn btn-outline-secondary {% if existing and existing.mood == val %}active{% endif %}">
+                <input type="radio" name="mood" value="{{ val }}" autocomplete="off"
+                       {% if existing and existing.mood == val %}checked{% endif %}>
+                {{ label }}
+            </label>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label fw-bold">Энергия (1-5)</label>
+        <div class="d-flex gap-2">
+            {% for i in range_5 %}
+            <label class="btn btn-outline-secondary {% if existing and existing.energy == i %}active{% endif %}">
+                <input type="radio" name="energy" value="{{ i }}" autocomplete="off"
+                       {% if existing and existing.energy == i %}checked{% endif %}>
+                {{ i }}
+            </label>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label fw-bold">Сон (1-5)</label>
+        <div class="d-flex gap-2">
+            {% for i in range_5 %}
+            <label class="btn btn-outline-secondary {% if existing and existing.sleep == i %}active{% endif %}">
+                <input type="radio" name="sleep" value="{{ i }}" autocomplete="off"
+                       {% if existing and existing.sleep == i %}checked{% endif %}>
+                {{ i }}
+            </label>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label fw-bold" for="notes">Заметки</label>
+        <textarea class="form-control" name="notes" id="notes" rows="3"
+                  placeholder="Как прошёл день? Что болит? Как питание?">{% if existing %}{{ existing.notes }}{% endif %}</textarea>
+    </div>
+
+    <button type="submit" class="btn btn-success">
+        {% if existing %}Обновить{% else %}Отправить{% endif %}
+    </button>
+    <a href="{% url 'gym:checkin:history' %}" class="btn btn-outline-secondary ms-2">История</a>
+</form>
+
+{% endblock %}

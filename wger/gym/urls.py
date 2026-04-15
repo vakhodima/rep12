@@ -22,6 +22,7 @@ from django.urls import path
 from wger.gym.views import (
     admin_config,
     admin_notes,
+    checkin,
     config,
     contract,
     contract_option,
@@ -234,6 +235,13 @@ patterns_contract_options = [
     ),
 ]
 
+# sub patterns for check-ins
+patterns_checkin = [
+    path('', checkin.checkin_create, name='create'),
+    path('history/', checkin.checkin_history, name='history'),
+    path('client/<int:client_pk>/', checkin.checkin_client, name='client'),
+]
+
 # sub patterns for exports
 patterns_export = [
     path(
@@ -265,4 +273,5 @@ urlpatterns = [
         include((patterns_contract_options, 'contract-option'), namespace='contract-option'),
     ),
     path('export/', include((patterns_export, 'export'), namespace='export')),
+    path('checkin/', include((patterns_checkin, 'checkin'), namespace='checkin')),
 ]

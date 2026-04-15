@@ -560,3 +560,99 @@ class PushSubscriptionEdgeCasesTest(WgerTestCase):
             PushSubscription.objects.filter(user_id=1, endpoint='https://fcm.test/admin').exists()
         )
         PushSubscription.objects.filter(endpoint='https://fcm.test/admin').delete()
+
+
+class CheckInTest(WgerTestCase):
+    """Tests for the check-in system."""
+
+    def test_anon_redirect(self):
+        """Anonymous users redirected to login."""
+        resp = self.client.get('/gym/checkin/')
+        self.assertEqual(resp.status_code, 302)
+
+    def test_create_checkin(self):
+        """Client can create a check-in."""
+        self.user_login('test')
+        resp = self.client.post('/gym/checkin/', {
+            'mood': '4', 'energy': '3', 'sleep': '5', 'notes': 'Feeling great',
+        })
+        self.assertEqual(resp.status_code, 302)
+
+        from wger.gym.models.checkin import CheckIn
+        ci = CheckIn.objects.filter(user_id=2).first()
+        self.assertIsNotNone(ci)
+        self.assertEqual(ci.mood, 4)
+        self.assertEqual(ci.energy, 3)
+        self.assertEqual(ci.sleep, 5)
+        self.assertEqual(ci.notes, 'Feeling great')
+        ci.delete()
+
+    def test_update_same_day(self):
+        """Second check-in on same day updates existing."""
+        self.user_login('test')
+        self.client.post('/gym/checkin/', {
+            'mood': '3', 'energy': '3', 'sleep': '3', 'notes': '',
+        })
+        self.client.post('/gym/checkin/', {
+            'mood': '5', 'energy': '5', 'sleep': '5', 'notes': 'Updated',
+        })
+
+        from wger.gym.models.checkin import CheckIn
+        cis = CheckIn.objects.filter(user_id=2)
+        self.assertEqual(cis.count(), 1)
+        self.assertEqual(cis.first().mood, 5)
+        cis.delete()
+
+    def test_missing_fields_error(self):
+        """Missing required fields show error."""
+        self.user_login('test')
+        resp = self.client.post('/gym/checkin/', {
+            'mood': '4', 'notes': 'no energy or sleep',
+        })
+        self.assertEqual(resp.status_code, 200)
+        self.assertContains(resp, 'Заполните все поля')
+
+    def test_history_page(self):
+        """Check-in history page loads."""
+        self.user_login('test')
+        resp = self.client.get('/gym/checkin/history/')
+        self.assertEqual(resp.status_code, 200)
+
+    def test_trainer_sees_client_checkins(self):
+        """Trainer can view client check-ins."""
+        from wger.gym.models.checkin import CheckIn
+        ci = CheckIn.objects.create(user_id=2, mood=4, energy=3, sleep=5, notes='Test')
+
+        self.user_login('trainer1')
+        resp = self.client.get(f'/gym/checkin/client/2/')
+        self.assertEqual(resp.status_code, 200)
+        self.assertContains(resp, 'Хорошо')
+        ci.delete()
+
+    def test_trainer_wrong_gym_forbidden(self):
+        """Trainer cannot view client from different gym."""
+        self.user_login('trainer1')
+        resp = self.client.get('/gym/checkin/client/3/')
+        self.assertEqual(resp.status_code, 403)
+
+    def test_non_trainer_forbidden(self):
+        """Regular user cannot view other's check-ins."""
+        self.user_login('test')
+        resp = self.client.get('/gym/checkin/client/1/')
+        self.assertEqual(resp.status_code, 403)
+
+
+class GalleryCompareTest(WgerTestCase):
+    """Tests for gallery compare feature."""
+
+    def test_gallery_loads(self):
+        """Gallery overview loads for authenticated user."""
+        self.user_login('test')
+        resp = self.client.get('/gallery/images/overview/')
+        self.assertEqual(resp.status_code, 200)
+
+    def test_compare_button_absent_without_images(self):
+        """Compare button not shown when < 2 images."""
+        self.user_login('test')
+        resp = self.client.get('/gallery/images/overview/')
+        self.assertNotContains(resp, 'enterCompare')

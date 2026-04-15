@@ -28,4 +28,5 @@ from .user_config import (
     GymAdminConfig,
     GymUserConfig,
 )
+from .checkin import CheckIn
 from .user_document import UserDocument

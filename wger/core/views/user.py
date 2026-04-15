@@ -589,6 +589,8 @@ class UserDetailView(LoginRequiredMixin, WgerMultiplePermissionRequiredMixin, De
         )[:5]
         context['session'] = WorkoutSession.objects.filter(user=self.object).order_by('-date')[:10]
         context['admin_notes'] = AdminUserNote.objects.filter(member=self.object)[:5]
+        from wger.gym.models.checkin import CheckIn
+        context['checkins'] = CheckIn.objects.filter(user=self.object)[:10]
         context['contracts'] = Contract.objects.filter(member=self.object)[:5]
 
         page_user = self.object  # type: User

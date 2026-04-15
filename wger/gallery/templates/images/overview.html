@@ -51,20 +51,132 @@
         </div>
     {% endfor %}
 
-    <div class="row">
+    {# Compare panel - hidden by default #}
+    <div id="compare-panel" style="display:none" class="mb-4">
+        <div class="alert alert-info d-flex align-items-center justify-content-between py-2">
+            <span id="compare-hint">Выберите 2 фото для сравнения</span>
+            <button class="btn btn-sm btn-outline-secondary" onclick="exitCompare()">Отмена</button>
+        </div>
+        <div id="compare-view" style="display:none">
+            <div class="row">
+                <div class="col-6 text-center">
+                    <img id="compare-img-1" class="img-fluid rounded" src="" alt="">
+                    <div class="mt-1 fw-bold" id="compare-date-1"></div>
+                </div>
+                <div class="col-6 text-center">
+                    <img id="compare-img-2" class="img-fluid rounded" src="" alt="">
+                    <div class="mt-1 fw-bold" id="compare-date-2"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" id="gallery-grid">
         {% for image in images %}
-            <div class="col-sm-6 col-lg-4 mb-4">
-                <a href="#" data-bs-toggle="modal" data-bs-target="#modalImage{{ image.id }}">
-                    <img class="w-100 rounded" src="{{ image.image.url }}" alt="{{ image.description }}">
+            <div class="col-sm-6 col-lg-4 mb-4 gallery-item"
+                 data-id="{{ image.id }}"
+                 data-url="{{ image.image.url }}"
+                 data-date="{{ image.date }}">
+                <a href="#" data-bs-toggle="modal" data-bs-target="#modalImage{{ image.id }}"
+                   class="gallery-link">
+                    <img class="w-100 rounded" src="{{ image.image.url }}"
+                         alt="{{ image.description }}" loading="lazy">
                 </a>
             </div>
         {% endfor %}
     </div>
 
+    <style>
+    .gallery-item.compare-mode { cursor: pointer; }
+    .gallery-item.compare-mode .gallery-link { pointer-events: none; }
+    .gallery-item.selected img { outline: 3px solid #44E5A3; outline-offset: -3px; }
+    .gallery-item.compare-mode:hover img { opacity: 0.8; }
+    </style>
+
+    <script>
+    (function() {
+        var compareMode = false;
+        var selected = [];
+
+        window.enterCompare = function() {
+            if (document.querySelectorAll('.gallery-item').length < 2) return;
+            compareMode = true;
+            selected = [];
+            document.getElementById('compare-panel').style.display = '';
+            document.getElementById('compare-view').style.display = 'none';
+            document.getElementById('compare-hint').textContent = 'Выберите 2 фото для сравнения';
+            document.querySelectorAll('.gallery-item').forEach(function(el) {
+                el.classList.add('compare-mode');
+                el.classList.remove('selected');
+            });
+        };
+
+        window.exitCompare = function() {
+            compareMode = false;
+            selected = [];
+            document.getElementById('compare-panel').style.display = 'none';
+            document.getElementById('compare-view').style.display = 'none';
+            document.querySelectorAll('.gallery-item').forEach(function(el) {
+                el.classList.remove('compare-mode', 'selected');
+            });
+        };
+
+        document.getElementById('gallery-grid').addEventListener('click', function(e) {
+            if (!compareMode) return;
+            var item = e.target.closest('.gallery-item');
+            if (!item) return;
+            e.preventDefault();
+            e.stopPropagation();
+
+            var id = item.dataset.id;
+            var idx = selected.indexOf(id);
+            if (idx !== -1) {
+                selected.splice(idx, 1);
+                item.classList.remove('selected');
+                document.getElementById('compare-view').style.display = 'none';
+                document.getElementById('compare-hint').textContent = 'Выберите 2 фото для сравнения';
+                return;
+            }
+            if (selected.length >= 2) return;
+
+            selected.push(id);
+            item.classList.add('selected');
+
+            if (selected.length === 1) {
+                document.getElementById('compare-hint').textContent = 'Выберите ещё 1 фото';
+            }
+            if (selected.length === 2) {
+                document.getElementById('compare-hint').textContent = 'Сравнение';
+                showCompare();
+            }
+        });
+
+        function showCompare() {
+            var items = [];
+            selected.forEach(function(id) {
+                var el = document.querySelector('.gallery-item[data-id="' + id + '"]');
+                if (el) items.push({ url: el.dataset.url, date: el.dataset.date });
+            });
+            items.sort(function(a, b) { return a.date < b.date ? -1 : 1; });
+
+            document.getElementById('compare-img-1').src = items[0].url;
+            document.getElementById('compare-date-1').textContent = items[0].date;
+            document.getElementById('compare-img-2').src = items[1].url;
+            document.getElementById('compare-date-2').textContent = items[1].date;
+            document.getElementById('compare-view').style.display = '';
+        }
+    })();
+    </script>
+
 {% endblock %}
 
 
 {% block options %}
+    {% if images|length >= 2 %}
+    <button class="btn btn-outline-primary btn-sm me-1" onclick="enterCompare()">
+        <i class="fas fa-columns"></i> Сравнить
+    </button>
+    {% endif %}
     <a href="{% url 'gallery:images:add' %}" class="btn btn-success btn-sm">
         {% translate "Add image" %}
     </a>

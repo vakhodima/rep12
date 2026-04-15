@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}Мои чек-ины{% endblock %}
+
+{% block content %}
+
+{% if checkins %}
+<table class="table">
+<thead>
+<tr>
+    <th>Дата</th>
+    <th>Настроение</th>
+    <th>Энергия</th>
+    <th>Сон</th>
+    <th>Заметки</th>
+</tr>
+</thead>
+<tbody>
+{% for c in checkins %}
+<tr>
+    <td>{{ c.date }}</td>
+    <td>{{ c.get_mood_display }}</td>
+    <td>{{ c.energy }}/5</td>
+    <td>{{ c.sleep }}/5</td>
+    <td>{{ c.notes|truncatewords:10|default:"-" }}</td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+{% else %}
+<p class="text-muted">Нет чек-инов. <a href="{% url 'gym:checkin:create' %}">Заполнить первый</a></p>
+{% endif %}
+
+{% endblock %}
+
+{% block options %}
+<a href="{% url 'gym:checkin:create' %}" class="btn btn-success btn-sm">Новый чек-ин</a>
+{% endblock %}
