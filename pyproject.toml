@@ -69,6 +69,7 @@ dependencies = [
     "pywebpush~=2.0.1",
     "livekit-api~=0.7.1",
     "django-ratelimit~=4.1.0",
+    "sentry-sdk[django,celery]~=2.22.0",
 ]
 
 [dependency-groups]

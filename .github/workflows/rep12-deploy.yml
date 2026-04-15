@@ -1,0 +1,70 @@
+name: REP12 Deploy
+
+on:
+  push:
+    branches: [rep12]
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_DB: rep12_test
+          POSTGRES_USER: rep12
+          POSTGRES_PASSWORD: testpass
+        ports:
+          - 5432:5432
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+      redis:
+        image: redis:7-alpine
+        ports:
+          - 6379:6379
+    env:
+      DJANGO_SETTINGS_MODULE: settings.main
+      DJANGO_DEBUG: "True"
+      DJANGO_DB_ENGINE: django.db.backends.postgresql
+      DJANGO_DB_DATABASE: rep12_test
+      DJANGO_DB_USER: rep12
+      DJANGO_DB_PASSWORD: testpass
+      DJANGO_DB_HOST: localhost
+      DJANGO_DB_PORT: "5432"
+      DJANGO_CACHE_LOCATION: redis://localhost:6379/1
+      CELERY_BROKER: redis://localhost:6379/2
+      SITE_URL: http://localhost
+      ALLOWED_HOSTS: localhost,127.0.0.1
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          pip install --group docker .
+          pip install pywebpush livekit-api django-ratelimit sentry-sdk
+
+      - name: Run REP12 custom tests
+        run: python manage.py test wger.core.tests.test_rep12 --verbosity=2
+
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/rep12'
+    steps:
+      - name: Deploy to VPS
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: root
+          key: ${{ secrets.VPS_SSH_KEY }}
+          script: |
+            cd /opt/rep12/repo
+            git pull origin rep12
+            docker build -f extras/docker/production/Dockerfile -t rep12/server:latest .
+            cd /opt/rep12/deploy
+            docker compose up -d web celery-worker celery-beat --force-recreate
+            echo "Deploy complete: $(date)"
