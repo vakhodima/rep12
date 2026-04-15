@@ -354,20 +354,3 @@ if USE_S3_MEDIA_FILES or USE_S3_STATIC_FILES:
         }
         if env.bool('USE_S3_URL_FOR_STATIC', True):
             STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/'
-
-#
-# Sentry error tracking (optional — only active if SENTRY_DSN is set)
-#
-_SENTRY_DSN = env.str('SENTRY_DSN', '')
-if _SENTRY_DSN:
-    import sentry_sdk
-    from sentry_sdk.integrations.django import DjangoIntegration
-    from sentry_sdk.integrations.celery import CeleryIntegration
-
-    sentry_sdk.init(
-        dsn=_SENTRY_DSN,
-        integrations=[DjangoIntegration(), CeleryIntegration()],
-        traces_sample_rate=env.float('SENTRY_TRACES_RATE', 0.1),
-        send_default_pii=False,
-        environment=env.str('SENTRY_ENVIRONMENT', 'production'),
-    )
