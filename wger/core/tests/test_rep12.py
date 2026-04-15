@@ -1,5 +1,6 @@
 """Tests for REP12 custom views: assign, push, call."""
 
+import datetime
 import hashlib
 import json
 
@@ -7,6 +8,19 @@ from django.test import TestCase
 from django.urls import reverse
 
 from wger.core.tests.base_testcase import WgerTestCase
+
+
+def _make_routine(user_id, name='Test routine'):
+    """Helper to create a routine with required fields."""
+    from wger.manager.models import Routine
+
+    today = datetime.date.today()
+    return Routine.objects.create(
+        user_id=user_id,
+        name=name,
+        start=today,
+        end=today + datetime.timedelta(days=90),
+    )
 
 
 class AssignRoutineTest(WgerTestCase):
@@ -28,9 +42,7 @@ class AssignRoutineTest(WgerTestCase):
         """Trainer can access assign page for own routine."""
         self.user_login('trainer1')
         # trainer1 pk=4, needs a routine owned by trainer1
-        from wger.manager.models import Routine
-
-        r = Routine.objects.create(user_id=4, name='Test assign')
+        r = _make_routine(4, 'Test assign')
         resp = self.client.get(f'/routine/{r.pk}/assign/')
         self.assertEqual(resp.status_code, 200)
         r.delete()
@@ -45,9 +57,7 @@ class AssignRoutineTest(WgerTestCase):
     def test_assign_copies_routine(self):
         """POST to assign_routine copies routine to client."""
         self.user_login('trainer1')
-        from wger.manager.models import Routine
-
-        src = Routine.objects.create(user_id=4, name='Copy test')
+        src = _make_routine(4, 'Copy test')
         # test user pk=2 is in same gym (gym=1)
         resp = self.client.post(
             f'/routine/{src.pk}/assign/',
@@ -62,9 +72,7 @@ class AssignRoutineTest(WgerTestCase):
     def test_assign_cross_gym_forbidden(self):
         """Trainer cannot assign to user in different gym."""
         self.user_login('trainer1')
-        from wger.manager.models import Routine
-
-        src = Routine.objects.create(user_id=4, name='Cross gym')
+        src = _make_routine(4, 'Cross gym')
         # demo user pk=3 is in gym=2, trainer1 is in gym=1
         resp = self.client.post(
             f'/routine/{src.pk}/assign/',
