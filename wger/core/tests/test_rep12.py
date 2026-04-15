@@ -648,11 +648,11 @@ class GalleryCompareTest(WgerTestCase):
     def test_gallery_loads(self):
         """Gallery overview loads for authenticated user."""
         self.user_login('test')
-        resp = self.client.get('/gallery/images/overview/')
+        resp = self.client.get('/gallery/images/overview', follow=True)
         self.assertEqual(resp.status_code, 200)
 
     def test_compare_button_absent_without_images(self):
         """Compare button not shown when < 2 images."""
         self.user_login('test')
-        resp = self.client.get('/gallery/images/overview/')
+        resp = self.client.get('/gallery/images/overview', follow=True)
         self.assertNotContains(resp, 'enterCompare')
