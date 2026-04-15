@@ -250,6 +250,7 @@
                            onclick="fetch('/api/call/link/').then(r=>r.json()).then(d=>{window.location.href=d.call_url});return false;"
                            title="Видеозвонок">
                             <i class="fas fa-video" style="color:#44E5A3"></i>
+                            <span class="d-inline d-md-none ms-1">Видеозвонок</span>
                         </a>
                     </li>
                     {% endif %}
@@ -262,6 +263,7 @@
                         <a href="#" class="nav-link text-white" onclick="rep12RequestPush();return false;"
                            title="Уведомления" style="display:none">
                             <i class="fas fa-bell"></i>
+                            <span class="d-inline d-md-none ms-1">Уведомления</span>
                         </a>
                     </li>
                     {% endif %}
@@ -274,6 +276,7 @@
                            class="nav-link text-white"
                            style="opacity: 0.5; font-size: 0.85em;">
                             <i class="fas fa-question-circle"></i>
+                            <span class="d-inline d-md-none ms-1">О REP12</span>
                         </a>
                     </li>
                 </ul>
