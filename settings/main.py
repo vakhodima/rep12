@@ -109,7 +109,7 @@ STATIC_URL = env.str('STATIC_URL', '/static/')
 LOGIN_REDIRECT_URL = env.str('LOGIN_REDIRECT_URL', '/')
 
 # REP12: read from env, default to rep12.ru
-ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['rep12.ru', 'www.rep12.ru'])
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['rep12.ru', 'www.rep12.ru', 'localhost'])
 
 # CORS
 CORS_ORIGIN_ALLOW_ALL = env.bool('CORS_ORIGIN_ALLOW_ALL', False)
