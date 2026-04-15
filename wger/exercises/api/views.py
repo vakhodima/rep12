@@ -369,11 +369,19 @@ class ExerciseInfoViewset(viewsets.ReadOnlyModelViewSet):
             'muscles',
             'muscles_secondary',
             'equipment',
-            'exerciseimage_set',
-            'exercisevideo_set',
+            Prefetch(
+                'exerciseimage_set',
+                queryset=ExerciseImage.objects.select_related('license'),
+            ),
+            Prefetch(
+                'exercisevideo_set',
+                queryset=ExerciseVideo.objects.select_related('license'),
+            ),
             Prefetch(
                 'translations',
-                queryset=Translation.objects.prefetch_related('alias_set', 'exercisecomment_set'),
+                queryset=Translation.objects.select_related('license').prefetch_related(
+                    'alias_set', 'exercisecomment_set'
+                ),
             ),
         )
 
