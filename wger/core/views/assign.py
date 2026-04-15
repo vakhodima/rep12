@@ -129,9 +129,8 @@ def _copy_routine_to_user(routine, target_user):
     r.end = r.start + duration
     r.save()
 
-    # Prefetch all nested relations in 2+10 queries instead of N*10
-    prefetch_fields = [f'slots__entries__{rel}' for rel in CONFIG_RELATIONS]
-    days = routine.days.prefetch_related('slots__entries', *prefetch_fields).all()
+    # Prefetch nested relations to reduce N+1 queries
+    days = routine.days.prefetch_related('slots__entries').all()
 
     for day in days:
         d = copy.copy(day)
