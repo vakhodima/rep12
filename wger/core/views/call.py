@@ -1,5 +1,5 @@
+import hashlib
 import os
-import random
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse, Http404
 from django.shortcuts import render, get_object_or_404
@@ -13,9 +13,8 @@ LIVEKIT_URL = os.environ.get('LIVEKIT_URL', 'ws://localhost:7880')
 
 def _get_room_code(gym_id):
     """Generate a stable 5-digit room code from gym_id"""
-    random.seed(f'rep12_room_{gym_id}')
-    code = random.randint(10000, 99999)
-    random.seed()  # reset seed
+    h = hashlib.sha256(f'rep12_room_{gym_id}'.encode()).hexdigest()
+    code = int(h[:8], 16) % 90000 + 10000
     return str(code)
 
 

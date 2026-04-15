@@ -86,7 +86,9 @@ PORT="${WGER_PORT:-8000}"
 if [[ "$WGER_USE_GUNICORN" == "True" ]];
 then
     echo "Using gunicorn on port $PORT..."
-    gunicorn wger.wsgi:application --preload --bind 0.0.0.0:$PORT
+    WORKERS="${GUNICORN_WORKERS:-3}"
+    THREADS="${GUNICORN_THREADS:-2}"
+    gunicorn wger.wsgi:application --preload --workers $WORKERS --threads $THREADS --timeout 120 --access-logfile - --bind 0.0.0.0:$PORT
 else
     echo "Using django's development server on port $PORT..."
     python3 manage.py runserver 0.0.0.0:$PORT

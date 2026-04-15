@@ -1,12 +1,16 @@
 import copy
 import datetime
+import logging
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.db import transaction
 from django.http import HttpResponseForbidden
 from django.shortcuts import get_object_or_404, render
 
 from wger.manager.models import Routine
+
+logger = logging.getLogger(__name__)
 
 
 CONFIG_RELATIONS = [
@@ -34,7 +38,7 @@ def assign_routine(request, routine_pk):
     if err:
         return err
 
-    routine = get_object_or_404(Routine, pk=routine_pk)
+    routine = get_object_or_404(Routine, pk=routine_pk, user=request.user)
     clients = User.objects.filter(
         userprofile__gym=gym
     ).exclude(pk=request.user.pk).order_by('username')
@@ -56,7 +60,7 @@ def assign_routine(request, routine_pk):
                 from wger.core.views.push import send_push
                 send_push(client, "Новая программа", f"Тренер назначил программу {routine.name}", "/routine/overview")
             except Exception:
-                pass
+                logger.exception('Failed to send push notification')
 
     return render(request, 'assign_routine.html', {
         'routine': routine,
@@ -95,7 +99,7 @@ def assign_to_client(request, client_pk):
                 from wger.core.views.push import send_push
                 send_push(client, "Новая программа", f"Тренер назначил программу {routine.name}", "/routine/overview")
             except Exception:
-                pass
+                logger.exception('Failed to send push notification')
 
     return render(request, 'assign_to_client.html', {
         'client': client,
@@ -105,6 +109,7 @@ def assign_to_client(request, client_pk):
     })
 
 
+@transaction.atomic
 def _copy_routine_to_user(routine, target_user):
     if routine.start and routine.end:
         duration = routine.end - routine.start

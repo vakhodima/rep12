@@ -399,7 +399,8 @@ SIMPLE_JWT = {
 #
 # CORS headers: allow all hosts to access the API
 #
-CORS_ORIGIN_ALLOW_ALL = True
+# REP12: CORS defaults to restricted, overridden by env in main.py
+CORS_ORIGIN_ALLOW_ALL = False
 CORS_URLS_REGEX = r'^/api/.*$'
 
 #

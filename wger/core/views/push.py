@@ -31,7 +31,7 @@ def subscribe(request):
         return JsonResponse({'ok': True})
     except Exception as e:
         logger.exception('Push subscribe error')
-        return JsonResponse({'error': str(e)}, status=500)
+        return JsonResponse({'error': 'Internal error'}, status=500)
 
 
 @login_required
@@ -44,7 +44,8 @@ def unsubscribe(request):
         PushSubscription.objects.filter(user=request.user, endpoint=endpoint).delete()
         return JsonResponse({'ok': True})
     except Exception as e:
-        return JsonResponse({'error': str(e)}, status=500)
+        logger.exception('Push unsubscribe error')
+        return JsonResponse({'error': 'Internal error'}, status=500)
 
 
 def send_push(user, title, body, url='/dashboard'):

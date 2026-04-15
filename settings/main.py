@@ -108,12 +108,14 @@ STATIC_URL = env.str('STATIC_URL', '/static/')
 
 LOGIN_REDIRECT_URL = env.str('LOGIN_REDIRECT_URL', '/')
 
-# Allow all hosts to access the application. Change if used in production.
-ALLOWED_HOSTS = [
-    '*',
-]
+# REP12: read from env, default to rep12.ru
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['rep12.ru', 'www.rep12.ru'])
 
-SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
+# CORS
+CORS_ORIGIN_ALLOW_ALL = env.bool('CORS_ORIGIN_ALLOW_ALL', False)
+CORS_ALLOWED_ORIGINS = env.list('CORS_ALLOWED_ORIGINS', default=['https://rep12.ru'])
+
+SESSION_ENGINE = env.str('SESSION_ENGINE', 'django.contrib.sessions.backends.cached_db')
 
 # Configure a real backend in production
 if DEBUG:
