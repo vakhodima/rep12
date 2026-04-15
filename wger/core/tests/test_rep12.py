@@ -64,6 +64,7 @@ class AssignRoutineTest(WgerTestCase):
             {'client_id': 2},
         )
         self.assertEqual(resp.status_code, 200)
+        from wger.manager.models import Routine
         copied = Routine.objects.filter(user_id=2, name='Copy test')
         self.assertTrue(copied.exists())
         copied.delete()
