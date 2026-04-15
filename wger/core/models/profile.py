@@ -235,6 +235,7 @@ by the US Department of Agriculture. It is extremely complete, with around
     """The user's height"""
 
     gender = models.CharField(
+        verbose_name=_('Gender'),
         max_length=1,
         choices=GENDER,
         default=GENDER_MALE,

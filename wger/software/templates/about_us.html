@@ -2,33 +2,33 @@
 {% load static i18n wger_extras %}
 
 
-{% block title %}{% translate "About REP12" %}{% endblock %}
+{% block title %}О REP12{% endblock %}
 
 {% block content %}
     <p>
-        REP12 — fitness platform for trainers and their clients.
-        Track workouts, manage nutrition, assign programs, and monitor progress together.
+        REP12 — фитнес-платформа для тренеров и их клиентов.
+        Планируйте тренировки, управляйте питанием, назначайте программы и отслеживайте прогресс вместе.
     </p>
 
-    <h3>{% translate "For Trainers" %}</h3>
+    <h3>Для тренеров</h3>
     <ul>
-        <li>Create and assign workout programs to clients</li>
-        <li>Track client progress and body measurements</li>
-        <li>Leave notes and communicate via video calls</li>
-        <li>Push notifications for new assignments</li>
+        <li>Создавайте и назначайте программы тренировок клиентам</li>
+        <li>Отслеживайте прогресс клиентов и измерения тела</li>
+        <li>Оставляйте заметки и общайтесь через видеозвонки</li>
+        <li>Push-уведомления о новых назначениях</li>
     </ul>
 
-    <h3>{% translate "For Clients" %}</h3>
+    <h3>Для клиентов</h3>
     <ul>
-        <li>Follow assigned workout programs</li>
-        <li>Log workouts, nutrition, and body weight</li>
-        <li>Track achievements and earn trophies</li>
-        <li>Calculate macros with built-in nutrition tools</li>
+        <li>Выполняйте назначенные программы тренировок</li>
+        <li>Ведите журнал тренировок, питания и веса</li>
+        <li>Получайте достижения и трофеи</li>
+        <li>Рассчитывайте макросы с помощью встроенных калькуляторов</li>
     </ul>
 
-    <h4 class="mt-4">{% translate "Contact" %}</h4>
+    <h4 class="mt-4">Контакт</h4>
     <p>
-        Questions or feedback? Reach us at
+        Вопросы или предложения? Пишите нам:
         <a href="mailto:info@rep12.ru">info@rep12.ru</a>
     </p>
 {% endblock %}
@@ -36,10 +36,10 @@
 
 {% block sidebar %}
     <div class="alert alert-dark mt-5" role="alert">
-        {% translate "Current version" %} <strong>{{ version }}</strong>
+        Текущая версия <strong>{{ version }}</strong>
         {% if date %}
             <br>
-            {% translate 'Date' %} <strong>{{ date }}</strong>
+            Дата <strong>{{ date }}</strong>
         {% endif %}
     </div>
 {% endblock %}

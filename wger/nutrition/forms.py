@@ -112,7 +112,7 @@ class BmrForm(forms.ModelForm):
     Form for the basal metabolic rate
     """
 
-    weight = forms.DecimalField(widget=Html5NumberInput())
+    weight = forms.DecimalField(label=_('Weight'), widget=Html5NumberInput())
 
     class Meta:
         model = UserProfile
