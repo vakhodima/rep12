@@ -21,7 +21,9 @@ import logging
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import login as django_login
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
+from django.shortcuts import render
 from django.urls import reverse
 from django.utils.translation import gettext as _
 
@@ -47,6 +49,16 @@ def index(request):
     else:
         from wger.software.views import features
         return features(request)
+
+
+@login_required
+def welcome(request):
+    """
+    Welcome page shown after registration
+    """
+    return render(request, 'welcome.html', {
+        'username': request.user.username,
+    })
 
 
 def demo_entries(request):
@@ -75,3 +87,7 @@ def demo_entries(request):
             ),
         )
     return HttpResponseRedirect(reverse('core:dashboard'))
+
+
+def protein_guide(request):
+    return render(request, 'protein_guide.html')
