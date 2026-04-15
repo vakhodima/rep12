@@ -1,0 +1,186 @@
+{% extends "base.html" %}
+{% load i18n static %}
+
+{% block title %}Звонок — REP12{% endblock %}
+
+{% block content %}
+<style>
+.call-page {
+    position: fixed; inset: 0; background: #0F0F0F; z-index: 9999;
+    display: flex; flex-direction: column; overflow: hidden;
+}
+.call-header {
+    position: absolute; top: 0; left: 0; right: 0; z-index: 10;
+    display: flex; justify-content: center; align-items: center;
+    padding: 16px; background: linear-gradient(180deg, rgba(0,0,0,0.7) 0%, transparent 100%);
+}
+.call-timer {
+    font-size: 1.1rem; color: #DCDCDC; font-variant-numeric: tabular-nums;
+    background: rgba(0,0,0,0.5); padding: 4px 16px; border-radius: 20px;
+}
+.call-status { font-size: 0.85rem; color: #777; margin-left: 12px; }
+.remote-video-container {
+    flex: 1; display: flex; align-items: center; justify-content: center; background: #0F0F0F;
+}
+.remote-video-container video { width: 100%; height: 100%; object-fit: cover; }
+.remote-placeholder { text-align: center; color: #555; }
+.remote-placeholder .icon { font-size: 4rem; margin-bottom: 1rem; }
+.remote-placeholder .text { font-size: 1.2rem; color: #777; }
+.remote-placeholder .sub { font-size: 0.9rem; color: #555; margin-top: 0.5rem; }
+.local-video {
+    position: absolute; top: 80px; right: 16px; z-index: 10;
+    width: 120px; height: 160px; border-radius: 16px; overflow: hidden;
+    background: #1A1A1A; border: 2px solid #2A2A2A; cursor: grab; touch-action: none;
+}
+.local-video video { width: 100%; height: 100%; object-fit: cover; transform: scaleX(-1); }
+.call-controls {
+    position: absolute; bottom: 0; left: 0; right: 0; z-index: 10;
+    display: flex; justify-content: center; gap: 16px; padding: 24px;
+    background: linear-gradient(0deg, rgba(0,0,0,0.7) 0%, transparent 100%);
+}
+.call-btn {
+    width: 56px; height: 56px; border-radius: 50%; border: none;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.3rem; cursor: pointer; transition: all 0.2s;
+    background: #2A2A2A; color: #DCDCDC;
+}
+.call-btn:hover { background: #3A3A3A; }
+.call-btn.active { background: #44E5A3; color: #0F0F0F; }
+.call-btn.hangup { background: #E54444; color: white; }
+.call-btn.hangup:hover { background: #FF5555; }
+.call-btn.muted { background: #E54444; color: white; }
+.call-share { position: absolute; top: 16px; right: 16px; z-index: 11; }
+.share-btn {
+    background: rgba(68,229,163,0.15); color: #44E5A3; border: 1px solid #44E5A3;
+    padding: 6px 14px; border-radius: 8px; font-size: 0.8rem; cursor: pointer;
+}
+.share-btn:hover { background: rgba(68,229,163,0.3); }
+.toast-msg {
+    position: fixed; bottom: 100px; left: 50%; transform: translateX(-50%);
+    background: #44E5A3; color: #0F0F0F; padding: 8px 20px; border-radius: 8px;
+    font-size: 0.9rem; font-weight: 600; z-index: 100; opacity: 0; transition: opacity 0.3s;
+}
+.toast-msg.show { opacity: 1; }
+.inapp-warning {
+    position: fixed; inset: 0; background: #0F0F0F; z-index: 99999;
+    display: flex; flex-direction: column; align-items: center;
+    justify-content: center; padding: 2rem; text-align: center;
+}
+.inapp-warning h2 { color: #DCDCDC; margin-bottom: 1rem; }
+.inapp-warning p { color: #777; margin-bottom: 1.5rem; max-width: 320px; }
+.inapp-warning .open-btn {
+    background: #44E5A3; color: #0F0F0F; border: none; padding: 12px 32px;
+    border-radius: 12px; font-size: 1rem; font-weight: 700; cursor: pointer;
+}
+@media (max-width: 576px) {
+    .local-video { width: 90px; height: 120px; top: 60px; right: 10px; }
+    .call-btn { width: 48px; height: 48px; font-size: 1.1rem; }
+    .call-controls { padding: 16px; gap: 12px; }
+}
+</style>
+
+<div class="call-page" id="callPage">
+    <div class="call-header">
+        <span class="call-timer" id="callTimer">00:00</span>
+        <span class="call-status" id="callStatus">Подключение...</span>
+    </div>
+    <div class="call-share"><button class="share-btn" onclick="shareLink()"><i class="fas fa-link"></i> Скопировать ссылку</button></div>
+    <div class="local-video" id="localVideo"></div>
+    <div class="remote-video-container" id="remoteContainer">
+        <div class="remote-placeholder" id="remotePlaceholder">
+            <div class="icon"><i class="fas fa-user-circle"></i></div>
+            <div class="text">Ожидаем собеседника...</div>
+            <div class="sub">Отправьте ссылку для подключения</div>
+        </div>
+    </div>
+    <div class="call-controls">
+        <button class="call-btn active" id="btnMic" onclick="toggleMic()"><i class="fas fa-microphone"></i></button>
+        <button class="call-btn active" id="btnCam" onclick="toggleCam()"><i class="fas fa-video"></i></button>
+        <button class="call-btn" id="btnFlip" onclick="flipCam()"><i class="fas fa-sync-alt"></i></button>
+        <button class="call-btn hangup" onclick="hangUp()"><i class="fas fa-phone-slash"></i></button>
+    </div>
+</div>
+<div class="toast-msg" id="toast"></div>
+<div class="inapp-warning" id="inappWarning" style="display:none">
+    <h2>Откройте в браузере</h2>
+    <p>Видеозвонки не работают во встроенном браузере. Откройте ссылку в Safari или Chrome.</p>
+    <button class="open-btn" onclick="openInBrowser()">Открыть в браузере</button>
+</div>
+
+<script src="https://unpkg.com/livekit-client@2/dist/livekit-client.umd.js"></script>
+<script>
+const LK_URL='{{ livekit_url }}',LK_TOKEN='{{ livekit_token }}',ROOM_CODE='{{ room_code }}';
+const CALL_URL=window.location.origin+'/call/'+ROOM_CODE;
+const ua=navigator.userAgent||'';
+const isInApp=/FBAN|FBAV|Instagram|Telegram|WhatsApp|Line/i.test(ua);
+if(isInApp){document.getElementById('inappWarning').style.display='flex';document.getElementById('callPage').style.display='none';}
+function openInBrowser(){window.location.href='intent://'+CALL_URL.replace(/^https?:\/\//,'')+'#Intent;scheme=https;end';}
+
+let room,timerInterval,seconds=0,micOn=true,camOn=true;
+
+async function startCall(){
+    const LC=window.LivekitClient;
+    room=new LC.Room({adaptiveStream:true,dynacast:true});
+    room.on('participantConnected',p=>{
+        document.getElementById('callStatus').textContent=p.name||p.identity;
+        document.getElementById('remotePlaceholder').style.display='none';
+        startTimer();
+    });
+    room.on('participantDisconnected',()=>{
+        document.getElementById('callStatus').textContent='Собеседник отключился';
+        const rp=document.getElementById('remotePlaceholder');
+        rp.style.display='flex';rp.querySelector('.text').textContent='Собеседник отключился';
+        stopTimer();
+    });
+    room.on('trackSubscribed',(track,pub,participant)=>{
+        if(track.kind==='video'){
+            const el=track.attach();el.style.cssText='width:100%;height:100%;object-fit:cover';
+            const c=document.getElementById('remoteContainer');c.innerHTML='';c.appendChild(el);
+        }
+        if(track.kind==='audio'){document.body.appendChild(track.attach());}
+    });
+    room.on('trackUnsubscribed',track=>{track.detach().forEach(el=>el.remove());});
+    room.on('disconnected',()=>{document.getElementById('callStatus').textContent='Отключено';stopTimer();});
+
+    try{
+        await room.connect(LK_URL,LK_TOKEN);
+        document.getElementById('callStatus').textContent='Ожидаем собеседника...';
+        if(room.remoteParticipants.size>0){
+            const p=room.remoteParticipants.values().next().value;
+            document.getElementById('callStatus').textContent=p.name||p.identity;
+            document.getElementById('remotePlaceholder').style.display='none';
+            startTimer();
+        }
+        await room.localParticipant.enableCameraAndMicrophone();
+        const vt=Array.from(room.localParticipant.trackPublications.values()).find(t=>t.track&&t.track.kind==='video');
+        if(vt&&vt.track){document.getElementById('localVideo').appendChild(vt.track.attach());}
+    }catch(e){console.error(e);document.getElementById('callStatus').textContent='Ошибка подключения';}
+}
+
+function toggleMic(){if(!room)return;micOn=!micOn;room.localParticipant.setMicrophoneEnabled(micOn);
+    const b=document.getElementById('btnMic');b.innerHTML=micOn?'<i class="fas fa-microphone"></i>':'<i class="fas fa-microphone-slash"></i>';
+    b.classList.toggle('muted',!micOn);b.classList.toggle('active',micOn);}
+function toggleCam(){if(!room)return;camOn=!camOn;room.localParticipant.setCameraEnabled(camOn);
+    const b=document.getElementById('btnCam');b.innerHTML=camOn?'<i class="fas fa-video"></i>':'<i class="fas fa-video-slash"></i>';
+    b.classList.toggle('muted',!camOn);b.classList.toggle('active',camOn);}
+async function flipCam(){if(!room)return;const vt=Array.from(room.localParticipant.trackPublications.values()).find(t=>t.track&&t.track.kind==='video'&&t.source==='camera');
+    if(vt&&vt.track){const cur=vt.track.mediaStreamTrack.getSettings().facingMode;await room.localParticipant.setCameraEnabled(false);
+    await room.localParticipant.setCameraEnabled(true,{facingMode:cur==='user'?'environment':'user'});}}
+function hangUp(){if(room)room.disconnect();window.location.href='/';}
+function shareLink(){if(navigator.share){navigator.share({title:'REP12 — Звонок',url:CALL_URL});}
+    else{navigator.clipboard.writeText(CALL_URL).then(()=>showToast('Ссылка скопирована'));}}
+function showToast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2000);}
+function startTimer(){if(timerInterval)return;seconds=0;timerInterval=setInterval(()=>{seconds++;
+    const m=String(Math.floor(seconds/60)).padStart(2,'0'),s=String(seconds%60).padStart(2,'0');
+    document.getElementById('callTimer').textContent=m+':'+s;},1000);}
+function stopTimer(){if(timerInterval){clearInterval(timerInterval);timerInterval=null;}}
+
+// Draggable pip
+(function(){const el=document.getElementById('localVideo');let d=false,sx,sy,ox,oy;
+el.addEventListener('pointerdown',e=>{d=true;sx=e.clientX;sy=e.clientY;ox=el.offsetLeft;oy=el.offsetTop;el.setPointerCapture(e.pointerId);el.style.cursor='grabbing';});
+el.addEventListener('pointermove',e=>{if(!d)return;el.style.left=(ox+e.clientX-sx)+'px';el.style.top=(oy+e.clientY-sy)+'px';el.style.right='auto';});
+el.addEventListener('pointerup',()=>{d=false;el.style.cursor='grab';});})();
+
+if(!isInApp)startCall();
+</script>
+{% endblock %}

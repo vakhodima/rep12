@@ -1,0 +1,67 @@
+{% extends "template.html" %}
+{% load i18n %}
+
+{% block title %}Назначить программу{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <h2 class="mb-3">Назначить программу клиенту</h2>
+
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">{{ routine.name }}</h5>
+                    {% if routine.description %}
+                        <p class="card-text text-muted">{{ routine.description }}</p>
+                    {% endif %}
+                </div>
+            </div>
+
+            {% if success %}
+                <div class="alert alert-success">
+                    <i class="fas fa-check-circle"></i>
+                    Программа «{{ routine.name }}» назначена клиенту <strong>{{ success.get_full_name|default:success.username }}</strong>.
+                </div>
+                <a href="{% url 'core:user:overview' pk=success.pk %}" class="btn btn-success me-2">
+                    Профиль клиента
+                </a>
+                <a href="{% url 'manager:routine:overview' %}" class="btn btn-outline-secondary">
+                    К рутинам
+                </a>
+            {% else %}
+                {% if error %}
+                    <div class="alert alert-danger">{{ error }}</div>
+                {% endif %}
+
+                {% if clients %}
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="client_id" class="form-label">Клиент</label>
+                            <select name="client_id" id="client_id" class="form-select" required>
+                                <option value="">— Выберите клиента —</option>
+                                {% for client in clients %}
+                                    <option value="{{ client.pk }}">
+                                        {{ client.get_full_name|default:client.username }}
+                                        ({{ client.username }})
+                                    </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-success">
+                            <i class="fas fa-paper-plane"></i> Назначить
+                        </button>
+                        <a href="javascript:history.back()" class="btn btn-outline-secondary ms-2">Отмена</a>
+                    </form>
+                {% else %}
+                    <div class="alert alert-warning">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        У вас пока нет клиентов. Добавьте клиента в зал, чтобы назначать программы.
+                    </div>
+                {% endif %}
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

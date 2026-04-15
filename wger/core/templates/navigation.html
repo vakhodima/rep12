@@ -2,9 +2,8 @@
 <nav class="navbar navbar-expand-md bg-primary">
     <div class="container-fluid">
         <div class="container-lg" style="display: flex;">
-            <a class="navbar-brand" href="{% url 'core:index' %}">
-                <img src="{% static 'images/logos/logo-bg-white.png' %}" style="width: 38px;"
-                     alt="wger logo">
+            <a class="navbar-brand rep12-logo" href="{% url 'core:index' %}">
+                REP<span class="logo-12">12</span>
             </a>
             <button class="navbar-toggler"
                     type="button"
@@ -140,27 +139,18 @@
                     {# Nutrition tab #}
                     {#               #}
                     <li class="nav-item dropdown">
-                        <a href="{% url 'nutrition:plan:overview' %}"
+                        <a href="{% url 'nutrition:bmi:view' %}"
                            class="dropdown-toggle nav-link text-white {% if active_tab == 'nutrition' %}text-decoration-underline{% endif %}"
                            data-bs-toggle="dropdown"
-                           rel="nofollow">{% translate "Nutrition" %} <b class="caret"></b></a>
+                           rel="nofollow">Питание <b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                            <li>
-                                <a class="dropdown-item" href="{% url 'nutrition:plan:overview' %}"
-                                   rel="nofollow">
-                                    {% if not user.is_authenticated %}
-                                        <span class="{% fa_class 'lock' %}"></span>
-                                    {% endif %}
-                                    {% translate "Nutrition plans" %}
-                                </a>
-                            </li>
                             <li>
                                 <a class="dropdown-item" href="{% url 'nutrition:bmi:view' %}"
                                    rel="nofollow">
                                     {% if not user.is_authenticated %}
                                         <span class="{% fa_class 'lock' %}"></span>
                                     {% endif %}
-                                    {% translate "BMI calculator" %}
+                                    Калькулятор ИМТ
                                 </a>
                             </li>
                             <li>
@@ -169,25 +159,16 @@
                                     {% if not user.is_authenticated %}
                                         <span class="{% fa_class 'lock' %}"></span>
                                     {% endif %}
-                                    {% translate "Daily calories calculator" %}
+                                    Калькулятор калорий
                                 </a>
                             </li>
+                            <li class="dropdown-divider"></li>
                             <li>
-                                <a class="dropdown-item"
-                                   href="{% url 'nutrition:ingredient:list' %}">
-                                    {% translate "Ingredient overview" %}
+                                <a class="dropdown-item" href="{% url 'core:protein-guide' %}">
+                                    <i class="fas fa-drumstick-bite" style="color:#44E5A3"></i>
+                                    Гид по белку
                                 </a>
                             </li>
-                            {% if perms.nutrition %}
-                                <li class="dropdown-divider"></li>
-                                <li class="dropdown-header">{% translate "Administration" %}</li>
-                                <li>
-                                    <a class="dropdown-item"
-                                       href="{% url 'nutrition:weight_unit:list' %}">
-                                        {% translate "Ingredient weight units" %}
-                                    </a>
-                                </li>
-                            {% endif %}
                         </ul>
                     </li>
 
@@ -216,53 +197,84 @@
 
 
                     {#              #}
-                    {# Software tab #}
+                    {# Trainer tab  #}
                     {#              #}
-                    <li class="nav-item dropdown">
-                        <a href=""
-                           class="dropdown-toggle nav-link text-white {% if active_tab == 'software' %}text-decoration-underline{% endif %}"
-                           data-bs-toggle="dropdown">{% translate "About this software" %} <b
-                            class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <a class="dropdown-item"
-                                   href="{% url 'software:about-us' %}">
-                                    {% translate "Support & Get Involved" %}
-                                </a>
-                            </li>
-                            <li class="dropdown-divider"></li>
-                            <li>
-                                <a class="dropdown-item"
-                                   href="{% url 'software:api' %}">{% translate "REST API" %}</a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item"
-                                   href="https://github.com/wger-project/wger/blob/master/LICENSE.txt">
-                                    <span class="{% fa_class 'external-link-alt' %}"></span>
-                                    {% translate "License" %}
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="https://wger.readthedocs.io/">
-                                    <span class="{% fa_class 'external-link-alt' %}"></span>
-                                    {% translate "Developer documentation" %}
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item"
-                                   href="https://github.com/wger-project/wger">
-                                    <span class="{% fa_class 'external-link-alt' %}"></span>
-                                    {% translate "Get the code" %} (Github)
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item"
-                                   href="https://hosted.weblate.org/engage/wger/">
-                                    <span class="{% fa_class 'external-link-alt' %}"></span>
-                                    {% translate "Translate" %}
-                                </a>
-                            </li>
-                        </ul>
+                    {% if perms.gym.gym_trainer or perms.gym.manage_gym %}
+                        {% if user.userprofile.gym %}
+                        <li class="nav-item dropdown">
+                            <a href="{% url 'gym:gym:user-list' user.userprofile.gym.pk %}"
+                               class="dropdown-toggle nav-link text-white {% if active_tab == 'gym' %}text-decoration-underline{% endif %}"
+                               data-bs-toggle="dropdown"
+                               rel="nofollow">Тренер <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a class="dropdown-item"
+                                       href="{% url 'gym:gym:user-list' user.userprofile.gym.pk %}">
+                                        Мои клиенты
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item"
+                                       href="{% url 'gym:gym:add-user' user.userprofile.gym.pk %}">
+                                        Добавить клиента
+                                    </a>
+                                </li>
+                                <li class="dropdown-divider"></li>
+                                <li>
+                                    <a class="dropdown-item" href="#" onclick="fetch('/api/call/link/').then(r=>r.json()).then(d=>{window.location.href=d.call_url});return false;">
+                                        <i class="fas fa-video" style="color:#44E5A3"></i>
+                                        Видеозвонок
+                                    </a>
+                                </li>
+                                {% if perms.gym.manage_gym %}
+                                <li class="dropdown-divider"></li>
+                                <li>
+                                    <a class="dropdown-item"
+                                       href="{% url 'gym:gym:edit' user.userprofile.gym.pk %}">
+                                        Настройки зала
+                                    </a>
+                                </li>
+                                {% endif %}
+                            </ul>
+                        </li>
+                        {% endif %}
+                    {% endif %}
+
+
+                    {#              #}
+                    {# Call button  #}
+                    {#              #}
+                    {% if user.is_authenticated and user.userprofile.gym %}
+                    <li class="nav-item">
+                        <a href="#" class="nav-link text-white"
+                           onclick="fetch('/api/call/link/').then(r=>r.json()).then(d=>{window.location.href=d.call_url});return false;"
+                           title="Видеозвонок">
+                            <i class="fas fa-video" style="color:#44E5A3"></i>
+                        </a>
+                    </li>
+                    {% endif %}
+
+                    {#                    #}
+                    {# Push notifications #}
+                    {#                    #}
+                    {% if user.is_authenticated %}
+                    <li class="nav-item" id="push-bell">
+                        <a href="#" class="nav-link text-white" onclick="rep12RequestPush();return false;"
+                           title="Уведомления" style="display:none">
+                            <i class="fas fa-bell"></i>
+                        </a>
+                    </li>
+                    {% endif %}
+
+                    {#              #}
+                    {# Help link    #}
+                    {#              #}
+                    <li class="nav-item">
+                        <a href="{% url 'software:about-us' %}"
+                           class="nav-link text-white"
+                           style="opacity: 0.5; font-size: 0.85em;">
+                            <i class="fas fa-question-circle"></i>
+                        </a>
                     </li>
                 </ul>
 

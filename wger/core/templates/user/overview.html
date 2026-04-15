@@ -28,6 +28,7 @@
 <h4>{% translate "Routines" %} <small>({% blocktranslate with number=10 %}last {{ number }}{% endblocktranslate %})</small></h4>
 {% if perms.gym.gym_trainer %}
 <a href="{{trainer_login}}?next={% url 'manager:routine:overview' %}" class="btn btn-light btn-sm">{% translate "Overview" %}</a>
+<a href="{% url 'core:assign-to-client' client_pk=current_user.pk %}" class="btn btn-success btn-sm ms-1"><i class="fas fa-paper-plane"></i> Назначить программу</a>
 {#<a href="{{trainer_login}}?next={% url 'manager:workout:add' %}" class="btn btn-light btn-sm">{% translate "Add workout" %}</a>#}
 {% endif %}
 
@@ -272,6 +273,31 @@
 </script>
 
 {% endif %}
+
+<h4>Физические параметры</h4>
+<table class="table">
+    <tr>
+        <td>Рост</td>
+        <td>{% if current_user.userprofile.height %}{{ current_user.userprofile.height }} см{% else %}-/-{% endif %}</td>
+    </tr>
+    <tr>
+        <td>Возраст</td>
+        <td>{% if current_user.userprofile.age %}{{ current_user.userprofile.age }}{% else %}-/-{% endif %}</td>
+    </tr>
+    <tr>
+        <td>Пол</td>
+        <td>{% if current_user.userprofile.gender == "1" %}Мужской{% elif current_user.userprofile.gender == "2" %}Женский{% else %}-/-{% endif %}</td>
+    </tr>
+    <tr>
+        <td>Калории (цель)</td>
+        <td>{% if current_user.userprofile.calories %}{{ current_user.userprofile.calories }} ккал{% else %}-/-{% endif %}</td>
+    </tr>
+    <tr>
+        <td>Тренировки</td>
+        <td>{{ current_user.userprofile.workout_duration|default:"-/-" }} мин</td>
+    </tr>
+</table>
+
 <h4>{% translate "Details" %}</h4>
 
 <table class="table">

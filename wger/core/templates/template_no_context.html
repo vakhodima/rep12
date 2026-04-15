@@ -1,20 +1,5 @@
 <!DOCTYPE html>
-<!--
-    This file is part of wger Workout Manager
-
-    wger is free software: you can redistribute it and/or modify
-    it under the terms of the GNU Affero General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    wger is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU Affero General Public License for more details.
-
-    You should have received a copy of the GNU Affero General Public License
-    along with Workout Manager. If not, see <http://www.gnu.org/licenses/>.
--->
+<!-- Rep12 -->
 
 {% load i18n static wger_extras django_bootstrap_breadcrumbs %}
 <html lang="de">
@@ -27,6 +12,7 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/workout-manager.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'bootstrap-compiled.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap-custom.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/rep12-overrides.css' %}">
 
     <link rel="icon" href="{% static 'images/favicon.png' %}" type="image/png">
 
@@ -55,18 +41,8 @@
             <div class="col-md-6 mt-3" id="main-content">
                 <div id="content">
                     {% block content %}{% endblock %}
-                    <p>
-                        <a href="https://discord.gg/rPWFv6W" target="_blank"
-                           rel="noopener noreferrer"><i
-                            class="fab fa-discord p-2 fa-2x"></i></a>
-                        {% if mastodon %}
-                            <a href="{{ mastodon }}" target="_blank" rel="noopener noreferrer"><i
-                                class="fab fa-mastodon p-2 fa-2x" aria-hidden="true"></i></a>
-                        {% endif %}
-                        <a href="https://github.com/wger-project/wger/issues/new/choose"
-                           target="_blank"
-                           rel="noopener noreferrer"><i
-                            class="fab fa-github p-2 fa-2x" aria-hidden="true"></i></a>
+                    <p class="mt-3">
+                        <a href="{% url 'software:features' %}" class="btn btn-primary">На главную</a>
                     </p>
                 </div>
             </div>
@@ -75,5 +51,6 @@
 </div>
 
 
+<script src="/static/js/rep12-carousel.js" defer></script>
 </body>
 </html>

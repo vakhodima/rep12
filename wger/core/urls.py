@@ -25,6 +25,9 @@ from django.views.generic import TemplateView
 
 # wger
 from wger.core.forms import UserLoginForm
+from wger.core.views import call as call_views
+from wger.core.views import assign as assign_views
+from wger.core.views import push as push_views
 from wger.core.views import (
     languages,
     license,
@@ -198,6 +201,12 @@ urlpatterns = [
     # The landing page
     path('', misc.index, name='index'),
     path('dashboard', ReactView.as_view(login_required=True), name='dashboard'),
+    path('welcome', misc.welcome, name='welcome'),
+    path('protein-guide', misc.protein_guide, name='protein-guide'),
+    path('call/<str:room_code>', call_views.call_room, name='call-room'),
+    path('api/call/link/', call_views.call_link, name='call-link'),
+    path('routine/<int:routine_pk>/assign/', assign_views.assign_routine, name='assign-routine'),
+    path('user/<int:client_pk>/assign-routine/', assign_views.assign_to_client, name='assign-to-client'),
     path(
         'imprint',
         TemplateView.as_view(template_name='misc/about.html'),
@@ -211,4 +220,6 @@ urlpatterns = [
         include((patterns_repetition_units, 'repetition-unit'), namespace='repetition-unit'),
     ),
     path('weight-unit/', include((patterns_weight_units, 'weight-unit'), namespace='weight-unit')),
+    path('api/v2/push/subscribe/', push_views.subscribe, name='push-subscribe'),
+    path('api/v2/push/unsubscribe/', push_views.unsubscribe, name='push-unsubscribe'),
 ]

@@ -212,7 +212,7 @@ STATICFILES_DIRS = (('node', os.path.join(BASE_DIR, '..', 'node_modules')),)
 #
 # Email
 #
-EMAIL_SUBJECT_PREFIX = '[wger] '
+EMAIL_SUBJECT_PREFIX = '[Rep12] '
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 #
@@ -220,6 +220,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 #
 ACCOUNT_CONFIRM_EMAIL_ON_GET = True
 ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 2
+ACCOUNT_EMAIL_VERIFICATION = 'none'
+ACCOUNT_EMAIL_REQUIRED = False
 ACCOUNT_ADAPTER = 'wger.core.account_adapter.WgerAccountAdapter'
 
 #
@@ -252,45 +254,12 @@ TIME_ZONE = 'UTC'
 # upstream need to be added here as well (plus their country flag)
 # https://github.com/django/django/blob/main/django/conf/global_settings.py
 AVAILABLE_LANGUAGES = (
-    ('bg', 'Bulgarian'),
-    ('ca', 'Catalan'),
-    ('cs', 'Czech'),
-    ('de', 'German'),
-    ('el', 'Greek'),
-    ('en', 'English'),
-    ('en-au', 'Australian English'),
-    ('en-gb', 'British English'),
-    ('es', 'Spanish'),
-    ('es-ar', 'Argentinian Spanish'),
-    ('es-co', 'Colombian Spanish'),
-    ('es-mx', 'Mexican Spanish'),
-    ('es-ni', 'Nicaraguan Spanish'),
-    ('es-ve', 'Venezuelan Spanish'),
-    ('fr', 'French'),
-    ('he', 'Hebrew'),
-    ('hr', 'Croatian'),
-    ('it', 'Italian'),
-    ('ko', 'Korean'),
-    ('nl', 'Dutch'),
-    ('nb', 'Norwegian'),
-    ('pl', 'Polish'),
-    ('pt', 'Portuguese'),
-    ('pt-br', 'Brazilian Portuguese'),
     ('ru', 'Russian'),
-    ('sk', 'Slovak'),
-    ('sl', 'Slovenian'),
-    ('sr', 'Serbian'),
-    ('sv', 'Swedish'),
-    ('ta', 'Tamil'),
-    ('th', 'Thai'),
-    ('tr', 'Turkish'),
-    ('uk', 'Ukrainian'),
-    ('zh-hans', 'Chinese simplified'),
-    ('zh-hant', 'Traditional Chinese'),
 )
 
-# Default language code for this installation.
-LANGUAGE_CODE = 'en'
+# Only Russian language
+LANGUAGES = AVAILABLE_LANGUAGES
+LANGUAGE_CODE = 'ru'
 
 # All translation files are in one place
 LOCALE_PATHS = (os.path.join(SITE_ROOT, 'locale'),)
@@ -402,12 +371,11 @@ REST_FRAMEWORK = {
 # https://drf-spectacular.readthedocs.io/en/latest/
 #
 SPECTACULAR_SETTINGS = {
-    'TITLE': 'wger',
+    'TITLE': 'Rep12',
     'SERVERS': [
         {'url': '/', 'description': 'This server'},
-        {'url': 'https://wger.de', 'description': 'The "official" upstream wger instance'},
     ],
-    'DESCRIPTION': 'Self hosted FLOSS workout and fitness tracker',
+    'DESCRIPTION': 'Платформа для фитнес-тренеров и их клиентов',
     'VERSION': get_version(),
     'SERVE_INCLUDE_SCHEMA': True,
     'SCHEMA_PATH_PREFIX': '/api/v[0-9]',
@@ -466,7 +434,7 @@ WGER_SETTINGS = {
     'ALLOW_GUEST_USERS': True,
     'ALLOW_REGISTRATION': True,
     'ALLOW_UPLOAD_VIDEOS': False,
-    'EMAIL_FROM': 'wger Workout Manager <wger@example.com>',
+    'EMAIL_FROM': 'Rep12 <noreply@example.com>',
     'EXERCISE_CACHE_TTL': 3600,
     'DOWNLOAD_INGREDIENTS_FROM': DOWNLOAD_INGREDIENT_WGER,
     'INGREDIENT_CACHE_TTL': 604800,  # one week
@@ -478,7 +446,6 @@ WGER_SETTINGS = {
     'SYNC_EXERCISE_VIDEOS_CELERY': False,
     'SYNC_INGREDIENTS_CELERY': False,
     'SYNC_OFF_DAILY_DELTA_CELERY': False,
-    'EXPORT_INGREDIENTS_BULK_CELERY': False,
     'CACHE_API_EXERCISES_CELERY': False,
     'CACHE_API_EXERCISES_CELERY_FORCE_UPDATE': False,
     'TWITTER': False,

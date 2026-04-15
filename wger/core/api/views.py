@@ -380,6 +380,7 @@ class LanguageViewSet(viewsets.ReadOnlyModelViewSet):
     """
 
     queryset = Language.objects.all()
+    pagination_class = None
     serializer_class = LanguageSerializer
     ordering_fields = '__all__'
     filterset_fields = ('full_name', 'short_name')

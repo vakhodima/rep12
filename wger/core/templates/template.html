@@ -1,26 +1,11 @@
 <!DOCTYPE html>
-<!--
-    This file is part of wger Workout Manager
-
-    wger is free software: you can redistribute it and/or modify
-    it under the terms of the GNU Affero General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    wger is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU Affero General Public License for more details.
-
-    You should have received a copy of the GNU Affero General Public License
-    along with Workout Manager. If not, see <http://www.gnu.org/licenses/>.
--->
+<!-- Rep12 -->
 
 {% load i18n static wger_extras django_bootstrap_breadcrumbs %}
 {% block breadcrumbs %}
     {% clear_breadcrumbs %}
 {% endblock %}
-<html lang="{{ language.short_name }}">
+<html lang="{{ i18n_language.code }}">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta http-equiv="content-language" content="{{ i18n_language.code }}">
@@ -28,6 +13,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="icon" href="{% static 'images/favicon.png' %}" type="image/png">
+    <link rel="manifest" href="{% static 'manifest.json' %}">
+    <meta name="theme-color" content="#0F0F0F">
+    <meta name="vapid-key" content="BI0wN4mJpUnRejKM6GO0upHj6Te4RP0ug7OHj2BVieKJPR54GsJIFfbVv-NFtcjKCN02OrGg_UGcIbH4uq7vrng">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="REP12">
+    <link rel="apple-touch-icon" href="{% static 'images/favicon.png' %}">
 
     <!-- OpenGraph -->
     {% block opengraph %}
@@ -44,6 +36,7 @@
     <link rel="stylesheet" type="text/css" href="{% static 'fontawesomefree/css/all.min.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'node/@wger-project/react-components/build/assets/index.css' %}" id="react-css">
     <link rel="stylesheet" type="text/css" href="{% static 'css/language-menu.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/rep12-overrides.css' %}">
 
     <script src="{% static 'node/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
     <script src="{% static 'node/htmx.org/dist/htmx.min.js' %}"></script>
@@ -123,28 +116,9 @@
 
 <footer id="main-footer" class="bg-light border-top">
     <div class="container bg-wger-light">
-        <div class="row">
-            <div class="col-xl-4 col-md-7 mt-2">
-                <a href="https://play.google.com/store/apps/details?id=de.wger.flutter">
-                    <img
-                        src="{% static 'images/logos/play-store/badge.svg' %}"
-                        alt="google play logo"
-                        height="40"
-                    /></a>
-                <a href="https://apps.apple.com/us/app/wger-workout-manager/id6502226792">
-                    <img
-                        src="{% static 'images/logos/app-store/black.svg' %}"
-                        alt="app store logo"
-                        height="40"/></a>
-                <a href="https://flathub.org/apps/de.wger.flutter">
-                    <img
-                        src="{% static 'images/logos/flathub/black.svg' %}"
-                        alt="flathub logo"
-                        height="40"
-                    /></a>
-            </div>
-            <div class="col-xl-6 col-md-3">
-                <ul class="list-unstyled mb-0 pt-2">
+        <div class="row py-2">
+            <div class="col-md-8">
+                <ul class="list-unstyled mb-0 d-flex gap-3">
                     <li>
                         <a href="{% url 'core:imprint' %}" class="text-muted small">
                             {% translate "Imprint" %}
@@ -157,59 +131,102 @@
                     </li>
                 </ul>
             </div>
-
-            {#                                         #}
-            {# Render the links to the other languages #}
-            {#                                         #}
-            <div class="col-md-2">
-                {% if not is_api_path %}
-                    {# Don't show language switcher in the generated API views #}
-                    <div class="btn-group dropup">
-                        <button class="btn btn-light dropdown-toggle"
-                                type="button"
-                                data-bs-toggle="dropdown"
-                                aria-expanded="false">
-                            <span class="{% fa_class 'globe' %}"></span>
-                            {% translate i18n_language.name %}
-                            <span class="caret"></span>
-                        </button>
-
-                        <ul class="dropdown-menu language-menu" aria-labelledby="btnGroupLanguages">
-                            <li>
-                                <a class="dropdown-item" href="{% url 'core:language:browser_language' %}?next={{ request.path }}">
-                                    <span class="{% fa_class 'globe' %}"></span>
-                                    <span>{% translate "Browser language" %}</span>
-                                </a>
-                            </li>
-
-                            <form id="language-form" action="{% url 'set_language' %}" method="post">
-                                {% csrf_token %}
-                                <input name="next" type="hidden" value="{{ redirect_to }}">
-                                <input type="hidden" name="language" id="language-input">
-                                {% for language in languages %}
-                                    {% language_select language %}
-                                {% endfor %}
-                            </form>
-
-                            <li>
-                                <hr class="dropdown-divider"></hr>
-                            </li>
-                            <li>
-                                <a href="https://hosted.weblate.org/engage/wger/"
-                                   class="dropdown-item"
-                                   target="_blank">
-                                    <span class="{% fa_class 'plus' %}"></span>
-                                    {% translate "Translate" %}
-                                </a>
-                            </li>
-                        </ul>
-
-                    </div>
-                {% endif %}
+            <div class="col-md-4 text-md-end">
+                <span class="text-muted small">&copy; Rep12, 2026</span>
             </div>
         </div>
     </div>
 </footer>
 
+<script>
+var _swReg=null;
+if('serviceWorker' in navigator){
+  navigator.serviceWorker.register('/sw.js').then(function(r){_swReg=r;_checkPush();});
+}
+function _checkPush(){
+  if(!('PushManager' in window)||!_swReg)return;
+  _swReg.pushManager.getSubscription().then(function(sub){
+    var b=document.getElementById('push-bell');
+    if(!b)return;
+    var a=b.querySelector('a'),i=b.querySelector('i');
+    if(sub){a.style.display='';i.style.color='#44E5A3';}
+    else if(Notification.permission!=='denied'){a.style.display='';i.style.color='#888';}
+  });
+}
+function _b64u(s){
+  var p='='.repeat((4-s.length%4)%4);
+  var r=atob((s+p).replace(/-/g,'+').replace(/_/g,'/'));
+  var a=new Uint8Array(r.length);
+  for(var i=0;i<r.length;i++)a[i]=r.charCodeAt(i);
+  return a;
+}
+function rep12RequestPush(){
+  if(!_swReg)return;
+  var k=document.querySelector('meta[name="vapid-key"]');
+  if(!k)return;
+  _swReg.pushManager.subscribe({userVisibleOnly:true,applicationServerKey:_b64u(k.content)})
+  .then(function(sub){
+    var m=document.cookie.match(/csrftoken=([^;]+)/);
+    fetch('/api/v2/push/subscribe/',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','X-CSRFToken':m?m[1]:''},
+      body:JSON.stringify(sub.toJSON())
+    });
+    var b=document.getElementById('push-bell');
+    if(b)b.querySelector('i').style.color='#44E5A3';
+  }).catch(function(e){
+    if(e.name==='NotAllowedError')alert('Уведомления заблокированы в настройках браузера');
+  });
+}
+</script>
+<script>
+document.addEventListener('click', function(e) {
+    var chip = e.target.closest('[class*="MuiChip"]');
+    if (!chip) return;
+    var label = chip.querySelector('[class*="MuiChip-label"]');
+    if (!label) return;
+    var text = label.textContent.trim();
+    if (text && /\/exercise\/\d+\//.test(window.location.pathname)) {
+        window.location.href = '/exercise/overview/?search=' + encodeURIComponent(text);
+    }
+});
+</script>
+<script>
+// Make exercise names clickable in routine views
+(function(){
+  if(!(/\/routine\//.test(location.pathname)))return;
+  function linkify(){
+    var el=document.getElementById("react-page-no-shadow-dom");
+    if(!el)return;
+    var items=el.querySelectorAll('[class*="MuiTypography"]');
+    items.forEach(function(item){
+      if(item.dataset.r12linked||!item.textContent.trim())return;
+      if(item.tagName==="A"||item.closest("a"))return;
+      var text=item.textContent.trim();
+      if(text.length<4||/^[0-9.,\s]+$/.test(text))return;
+      var parent=item.closest('[class*="MuiCard"],[class*="MuiAccordion"],[class*="MuiListItem"]');
+      if(!parent)return;
+      item.dataset.r12linked="1";
+      item.style.cursor="pointer";
+      item.style.textDecoration="underline dotted rgba(68,229,163,0.4)";
+      item.style.textUnderlineOffset="3px";
+      item.addEventListener("click",function(){
+        window.location.href="/exercise/overview/?search="+encodeURIComponent(text);
+      });
+    });
+  }
+  var obs=new MutationObserver(function(){linkify();});
+  var target=document.getElementById("react-page-no-shadow-dom");
+  if(target){
+    obs.observe(target,{childList:true,subtree:true});
+    linkify();
+  } else {
+    document.addEventListener("DOMContentLoaded",function(){
+      var t2=document.getElementById("react-page-no-shadow-dom");
+      if(t2){obs.observe(t2,{childList:true,subtree:true});linkify();}
+    });
+  }
+})();
+</script>
 </body>
 </html>

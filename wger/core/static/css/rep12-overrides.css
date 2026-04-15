@@ -1,0 +1,1526 @@
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@700;800;900&family=Archivo:wght@400;500;600;700&display=swap");
+
+/* =============================================
+   REP12 — Premium Dark Theme
+   ============================================= */
+
+:root {
+    --r12-bg: #0F0F0F;
+    --r12-surface: #191919;
+    --r12-surface-2: #222222;
+    --r12-surface-3: #2E2E2E;
+    --r12-border: #2A2A2A;
+    --r12-border-hover: #3A3A3A;
+    --r12-text: #DCDCDC;
+    --r12-text-secondary: #777777;
+    --r12-text-muted: #555555;
+    --r12-accent: #44E5A3;
+    --r12-accent-dim: rgba(68, 229, 163, 0.10);
+    --r12-danger: #F06868;
+    --r12-warning: #E8B64A;
+    --r12-success: #44E5A3;
+    --r12-info: #6AABE8;
+    --r12-radius: 12px;
+    --r12-radius-sm: 8px;
+    --r12-font: 'Archivo', -apple-system, BlinkMacSystemFont, sans-serif;
+    --r12-font-display: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+    --r12-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+    --r12-shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.5);
+    --r12-transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+
+html, body { font-family: Archivo, sans-serif !important; }
+html { min-height: 100%; }
+
+body {
+    background: var(--r12-bg) !important;
+    color: var(--r12-text) !important;
+    font-family: var(--r12-font) !important;
+    -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6, .page-header {
+    font-family: var(--r12-font-display) !important;
+    color: var(--r12-text) !important;
+    font-weight: 700 !important;
+    letter-spacing: -0.02em;
+}
+
+a { color: var(--r12-accent) !important; text-decoration: none !important; transition: color var(--r12-transition); }
+a:hover { color: #6AEDB8 !important; }
+hr { border-color: var(--r12-border) !important; opacity: 1 !important; }
+::selection { background: var(--r12-accent); color: var(--r12-bg); }
+p, li, span, td, th, label, .form-text { color: var(--r12-text-secondary); }
+
+/* Navbar */
+.navbar { background: var(--r12-bg) !important; border-bottom: 1px solid var(--r12-border) !important; padding: 0.5rem 0 !important; }
+.navbar .nav-link { color: var(--r12-text-secondary) !important; font-weight: 500 !important; font-size: 0.875rem !important; padding: 0.5rem 1rem !important; border-radius: var(--r12-radius-sm); transition: all var(--r12-transition) !important; }
+.navbar .nav-link:hover, .navbar .nav-link:focus { color: var(--r12-text) !important; background: var(--r12-surface-2) !important; }
+.navbar .nav-link.text-decoration-underline { color: var(--r12-accent) !important; text-decoration: none !important; background: var(--r12-accent-dim) !important; }
+.navbar .text-white { color: var(--r12-text-secondary) !important; }
+.navbar .text-white:hover { color: var(--r12-text) !important; }
+.navbar-toggler { border-color: var(--r12-border) !important; }
+.navbar-toggler-icon { filter: invert(1) !important; }
+
+/* Dropdowns */
+.dropdown-menu { background: var(--r12-surface-2) !important; border: 1px solid var(--r12-border) !important; border-radius: var(--r12-radius) !important; box-shadow: var(--r12-shadow-lg) !important; padding: 0.5rem !important; }
+.dropdown-item { color: var(--r12-text-secondary) !important; font-size: 0.875rem !important; padding: 0.5rem 0.75rem !important; border-radius: var(--r12-radius-sm) !important; transition: all var(--r12-transition) !important; }
+.dropdown-item:hover, .dropdown-item:focus { background: var(--r12-surface-3) !important; color: var(--r12-text) !important; }
+.dropdown-item:active { background: var(--r12-accent-dim) !important; color: var(--r12-accent) !important; }
+.dropdown-header { color: var(--r12-text-muted) !important; font-size: 0.7rem !important; font-weight: 600 !important; letter-spacing: 0.1em !important; text-transform: uppercase !important; }
+.dropdown-divider { border-color: var(--r12-border) !important; }
+
+/* Cards */
+.card { background: var(--r12-surface) !important; border: 1px solid var(--r12-border) !important; border-radius: var(--r12-radius) !important; box-shadow: var(--r12-shadow) !important; transition: all var(--r12-transition) !important; overflow: hidden; }
+.card:hover { border-color: var(--r12-border-hover) !important; box-shadow: var(--r12-shadow-lg) !important; transform: translateY(-2px); }
+.card-header { background: var(--r12-surface-2) !important; border-bottom: 1px solid var(--r12-border) !important; color: var(--r12-text) !important; font-weight: 600 !important; }
+.card-body { color: var(--r12-text-secondary) !important; }
+.card-footer { background: var(--r12-surface-2) !important; border-top: 1px solid var(--r12-border) !important; }
+.card-title { color: var(--r12-text) !important; font-weight: 600; }
+
+/* Buttons */
+.btn { font-weight: 600 !important; border-radius: var(--r12-radius-sm) !important; padding: 0.5rem 1.25rem !important; transition: all var(--r12-transition) !important; border: none !important; }
+.btn-primary, .btn-success { background: var(--r12-accent) !important; color: var(--r12-bg) !important; }
+.btn-primary:hover, .btn-success:hover { background: #6AEDB8 !important; box-shadow: 0 4px 16px rgba(68, 229, 163, 0.25) !important; }
+.btn-secondary, .btn-light { background: var(--r12-surface-2) !important; color: var(--r12-text) !important; border: 1px solid var(--r12-border) !important; }
+.btn-danger { background: var(--r12-danger) !important; color: #fff !important; }
+.btn-outline-primary { background: transparent !important; color: var(--r12-accent) !important; border: 1px solid var(--r12-accent) !important; }
+.btn-link { color: var(--r12-accent) !important; background: none !important; padding: 0 !important; }
+
+/* Alerts */
+.alert { border-radius: var(--r12-radius) !important; border: 1px solid var(--r12-border) !important; }
+.alert-info { background: rgba(92, 164, 255, 0.08) !important; color: var(--r12-info) !important; }
+.alert-success { background: rgba(68, 229, 163, 0.08) !important; color: var(--r12-accent) !important; }
+.alert-warning { background: rgba(255, 186, 66, 0.08) !important; color: var(--r12-warning) !important; }
+.alert-danger { background: rgba(255, 92, 92, 0.08) !important; color: var(--r12-danger) !important; }
+
+/* Forms */
+.form-control, .form-select { background: var(--r12-surface-2) !important; border: 1px solid var(--r12-border) !important; color: var(--r12-text) !important; border-radius: var(--r12-radius-sm) !important; }
+.form-control:focus, .form-select:focus { border-color: var(--r12-accent) !important; box-shadow: 0 0 0 3px var(--r12-accent-dim) !important; }
+.form-control::placeholder { color: var(--r12-text-muted) !important; }
+.form-label { color: var(--r12-text) !important; font-weight: 500; }
+.form-check-input { background-color: var(--r12-surface-2) !important; border-color: var(--r12-border) !important; }
+.form-check-input:checked { background-color: var(--r12-accent) !important; border-color: var(--r12-accent) !important; }
+.input-group-text { background: var(--r12-surface-3) !important; border-color: var(--r12-border) !important; color: var(--r12-text-secondary) !important; }
+
+/* Tables */
+.table { color: var(--r12-text-secondary) !important; --bs-table-bg: transparent !important; border-color: var(--r12-border) !important; }
+.table th { color: var(--r12-text-muted) !important; font-size: 0.75rem !important; font-weight: 600 !important; text-transform: uppercase !important; letter-spacing: 0.08em !important; }
+.table td { border-color: var(--r12-border) !important; }
+
+/* Badges */
+.badge { font-weight: 600 !important; border-radius: 6px !important; }
+.badge.bg-primary { background: var(--r12-accent) !important; color: var(--r12-bg) !important; }
+.badge.bg-secondary { background: var(--r12-surface-3) !important; color: var(--r12-text-secondary) !important; }
+
+/* Modal */
+.modal-content { background: var(--r12-surface) !important; border: 1px solid var(--r12-border) !important; border-radius: var(--r12-radius) !important; }
+.modal-header { border-bottom-color: var(--r12-border) !important; }
+.modal-footer { border-top-color: var(--r12-border) !important; }
+.btn-close { filter: invert(1) !important; }
+
+/* Pagination */
+.page-link { background: var(--r12-surface-2) !important; border-color: var(--r12-border) !important; color: var(--r12-text-secondary) !important; }
+.page-link:hover { background: var(--r12-surface-3) !important; color: var(--r12-text) !important; }
+.page-item.active .page-link { background: var(--r12-accent) !important; color: var(--r12-bg) !important; }
+
+/* Footer */
+#main-footer, footer { background: var(--r12-surface) !important; border-top: 1px solid var(--r12-border) !important; }
+.bg-light, .bg-wger-light { background: transparent !important; }
+
+/* List groups */
+.list-group-item { background: var(--r12-surface) !important; border-color: var(--r12-border) !important; color: var(--r12-text-secondary) !important; }
+.list-group-item:hover { background: var(--r12-surface-2) !important; }
+
+/* Accordion */
+.accordion-button { background: var(--r12-surface) !important; color: var(--r12-text) !important; box-shadow: none !important; }
+.accordion-button:not(.collapsed) { background: var(--r12-surface-2) !important; color: var(--r12-accent) !important; }
+.accordion-button::after { filter: invert(1) !important; }
+.accordion-body { background: var(--r12-surface) !important; }
+.accordion-item { background: var(--r12-surface) !important; border-color: var(--r12-border) !important; }
+
+/* Nav tabs */
+.nav-tabs { border-bottom-color: var(--r12-border) !important; }
+.nav-tabs .nav-link { color: var(--r12-text-secondary) !important; }
+.nav-tabs .nav-link.active { background: var(--r12-surface-2) !important; color: var(--r12-accent) !important; }
+
+/* React / MUI components */
+[class*="_languages_l288f"], [class*="_language_l288f"] { display: none !important; }
+
+[class*="MuiCard"], [class*="MuiPaper"] {
+    background: var(--r12-surface) !important; color: var(--r12-text) !important;
+    border: 1px solid var(--r12-border) !important; border-radius: var(--r12-radius) !important;
+    box-shadow: var(--r12-shadow) !important;
+}
+[class*="MuiCard"]:hover { border-color: var(--r12-border-hover) !important; box-shadow: var(--r12-shadow-lg) !important; }
+[class*="MuiTypography"] { color: var(--r12-text) !important; }
+[class*="MuiChip"] { background: var(--r12-surface-3) !important; color: var(--r12-text-secondary) !important; }
+[class*="MuiButton-contained"] { background: var(--r12-accent) !important; color: var(--r12-bg) !important; }
+[class*="MuiButton-outlined"] { border-color: var(--r12-accent) !important; color: var(--r12-accent) !important; }
+
+[class*="MuiInputBase"], [class*="MuiOutlinedInput"], [class*="MuiTextField"] {
+    background: var(--r12-surface-2) !important; color: var(--r12-text) !important;
+}
+/* CRITICAL: fieldset overlay must be transparent so input text is visible */
+[class*="MuiOutlinedInput-notchedOutline"] {
+    background: transparent !important;
+    border-color: var(--r12-border) !important;
+}
+[class*="MuiInputLabel"] { color: var(--r12-text-secondary) !important; }
+
+[class*="MuiPagination"] [class*="MuiButtonBase"] { color: var(--r12-text-secondary) !important; }
+[class*="MuiPagination"] [class*="Mui-selected"] { background: var(--r12-accent) !important; color: var(--r12-bg) !important; }
+[class*="MuiSkeleton"] { background: var(--r12-surface-2) !important; }
+[class*="MuiDivider"] { border-color: var(--r12-border) !important; }
+
+[class*="MuiList"], [class*="MuiMenu-paper"], [class*="MuiPopover-paper"], [class*="MuiAutocomplete-paper"] {
+    background: var(--r12-surface-2) !important; color: var(--r12-text) !important;
+    border: 1px solid var(--r12-border) !important;
+}
+[class*="MuiMenuItem"]:hover, [class*="MuiAutocomplete-option"]:hover { background: var(--r12-surface-3) !important; }
+[class*="MuiTab"] { color: var(--r12-text-secondary) !important; }
+[class*="MuiTab"][class*="Mui-selected"] { color: var(--r12-accent) !important; }
+[class*="MuiTabs-indicator"] { background-color: var(--r12-accent) !important; }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: var(--r12-bg); }
+::-webkit-scrollbar-thumb { background: var(--r12-surface-3); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--r12-text-muted); }
+
+/* Misc */
+.text-muted { color: var(--r12-text-muted) !important; }
+.text-secondary { color: var(--r12-text-secondary) !important; }
+.border { border-color: var(--r12-border) !important; }
+.bg-white { background: var(--r12-surface) !important; }
+.text-dark { color: var(--r12-text) !important; }
+.progress { background: var(--r12-surface-2) !important; }
+.progress-bar { background: var(--r12-accent) !important; }
+.fa, .fas, .far, .fab, [class^="fa-"], [class*=" fa-"] { color: inherit !important; }
+
+/* =============================================
+   Dark Theme Fixes — Visual Audit
+   ============================================= */
+
+/* Exercise detail page: white header banner */
+[class*="_root_l288f"] {
+    background: var(--r12-surface) !important;
+    color: var(--r12-text) !important;
+}
+[class*="_header_l288f"] {
+    background: transparent !important;
+}
+[class*="_header_l288f"] h2 {
+    color: var(--r12-text) !important;
+}
+
+/* Exercise overview: gray image placeholder for cards without images */
+[class*="MuiCardMedia"] {
+    background-color: var(--r12-surface-2) !important;
+}
+/* The actual gray placeholder box (MuiBox inside MuiCardMedia) */
+[class*="MuiCardMedia"] > [class*="MuiBox-root"] {
+    background-color: var(--r12-surface-2) !important;
+    background: var(--r12-surface-2) !important;
+}
+[class*="MuiCard"] img[src=""],
+[class*="MuiCard"] img:not([src]),
+[class*="MuiCard"] [class*="placeholder"],
+[class*="MuiCard"] [class*="Placeholder"] {
+    background-color: var(--r12-surface-2) !important;
+}
+/* SVG placeholder icon in exercise cards */
+[class*="MuiCard"] svg[data-testid],
+[class*="MuiCard"] svg[class*="MuiSvg"] {
+    color: var(--r12-text-muted) !important;
+    fill: var(--r12-text-muted) !important;
+}
+
+/* Exercise card image area: make white-bg images blend better */
+[class*="MuiCard"] [class*="MuiCardActionArea"] > div:first-child {
+    background-color: var(--r12-surface-2) !important;
+}
+
+/* Ingredient overview: white search input area */
+#react-ingredient-overview [class*="MuiInputBase"],
+#react-ingredient-overview [class*="MuiOutlinedInput"],
+#react-ingredient-overview input {
+    background: var(--r12-surface-2) !important;
+    color: var(--r12-text) !important;
+}
+
+/* Checkboxes in MUI filter panels */
+[class*="MuiCheckbox"] {
+    color: var(--r12-text-muted) !important;
+}
+[class*="MuiCheckbox"][class*="Mui-checked"] {
+    color: var(--r12-accent) !important;
+}
+[class*="MuiFormControlLabel"] [class*="MuiTypography"] {
+    color: var(--r12-text-secondary) !important;
+}
+
+/* Switch/toggle styling */
+[class*="MuiSwitch-track"] {
+    background-color: var(--r12-surface-3) !important;
+}
+[class*="Mui-checked"] + [class*="MuiSwitch-track"] {
+    background-color: var(--r12-accent) !important;
+    opacity: 0.5 !important;
+}
+
+/* Landing/features page — exclude from dark overrides */
+/* The landing page uses its own light template, but footer link colors need fix */
+.footer-bg { background: var(--r12-surface) !important; }
+.footer-bg a { color: var(--r12-accent) !important; }
+
+/* Registration form on features page — dark section bg */
+.sign-up-bg {
+    background: var(--r12-surface) !important;
+    border-radius: var(--r12-radius) !important;
+    padding: 2rem !important;
+}
+.sign-up-bg .form-control {
+    background: var(--r12-surface-2) !important;
+    color: var(--r12-text) !important;
+    border-color: var(--r12-border) !important;
+}
+.sign-up-bg h3, .sign-up-bg label {
+    color: var(--r12-text) !important;
+}
+.sign-up-bg .form-text {
+    color: var(--r12-text-muted) !important;
+}
+
+/* Django footer with bg-light — force dark */
+#main-footer.bg-light, footer.bg-light {
+    background: var(--r12-surface) !important;
+}
+
+/* Breadcrumb */
+.breadcrumb { background: transparent !important; }
+.breadcrumb-item a { color: var(--r12-accent) !important; }
+.breadcrumb-item.active { color: var(--r12-text-secondary) !important; }
+
+/* Exercise detail: badges/chips for category and equipment */
+[class*="_root_l288f"] [class*="MuiChip"] {
+    background: var(--r12-surface-3) !important;
+    color: var(--r12-text-secondary) !important;
+    border: 1px solid var(--r12-border) !important;
+}
+
+/* Tooltip */
+[class*="MuiTooltip-tooltip"] {
+    background: var(--r12-surface-3) !important;
+    color: var(--r12-text) !important;
+}
+
+/* Border fix: remove reddish/visible borders on card containers */
+.border-top { border-color: var(--r12-border) !important; }
+.border-bottom { border-color: var(--r12-border) !important; }
+.border-start { border-color: var(--r12-border) !important; }
+.border-end { border-color: var(--r12-border) !important; }
+
+/* =============================================
+   Visual Audit Round 2 — April 2026
+   ============================================= */
+
+/* Chrome autofill: override light blue/white background on autofilled inputs */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px var(--r12-surface-2) inset !important;
+    -webkit-text-fill-color: var(--r12-text) !important;
+    caret-color: var(--r12-text) !important;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+/* MUI FAB button: consistent accent styling */
+[class*="MuiFab"] {
+    background: var(--r12-accent) !important;
+    color: var(--r12-bg) !important;
+    box-shadow: 0 4px 16px rgba(92, 201, 160, 0.3) !important;
+}
+[class*="MuiFab"]:hover {
+    background: #6AEDB8 !important;
+    box-shadow: 0 6px 20px rgba(92, 201, 160, 0.45) !important;
+}
+
+/* MUI Dialog / Dialogs should be dark */
+[class*="MuiDialog-paper"] {
+    background: var(--r12-surface) !important;
+    color: var(--r12-text) !important;
+    border: 1px solid var(--r12-border) !important;
+}
+
+/* MUI IconButton */
+[class*="MuiIconButton"] {
+    color: var(--r12-text-secondary) !important;
+}
+[class*="MuiIconButton"]:hover {
+    background: var(--r12-surface-3) !important;
+    color: var(--r12-text) !important;
+}
+
+/* MUI Select dropdown icon */
+[class*="MuiSelect-icon"] {
+    color: var(--r12-text-muted) !important;
+}
+
+/* MUI Drawer (side panels) */
+[class*="MuiDrawer-paper"] {
+    background: var(--r12-surface) !important;
+    color: var(--r12-text) !important;
+    border-color: var(--r12-border) !important;
+}
+
+/* MUI Snackbar / Alert bar */
+[class*="MuiSnackbar"] [class*="MuiAlert"] {
+    background: var(--r12-surface-2) !important;
+    color: var(--r12-text) !important;
+    border: 1px solid var(--r12-border) !important;
+}
+
+/* Password toggle button in forms */
+.input-group .btn-outline-secondary {
+    background: var(--r12-surface-3) !important;
+    color: var(--r12-text-secondary) !important;
+    border: 1px solid var(--r12-border) !important;
+}
+
+/* Ingredient list: avatar placeholders */
+.list-group-item .rounded-circle {
+    background: var(--r12-surface-3) !important;
+}
+
+/* MUI Breadcrumbs */
+[class*="MuiBreadcrumbs"] a {
+    color: var(--r12-accent) !important;
+}
+[class*="MuiBreadcrumbs"] p,
+[class*="MuiBreadcrumbs"] li {
+    color: var(--r12-text-secondary) !important;
+}
+
+/* Toast / notification styling */
+.toast { background: var(--r12-surface-2) !important; border-color: var(--r12-border) !important; }
+.toast-header { background: var(--r12-surface-3) !important; color: var(--r12-text) !important; border-bottom-color: var(--r12-border) !important; }
+.toast-body { color: var(--r12-text-secondary) !important; }
+
+/* Offcanvas (mobile menu) */
+.offcanvas { background: var(--r12-surface) !important; color: var(--r12-text) !important; }
+.offcanvas-header { border-bottom: 1px solid var(--r12-border) !important; }
+.offcanvas-title { color: var(--r12-text) !important; }
+
+/* =============================================
+   Visual Audit Round 3 — Exercise & MUI fixes
+   ============================================= */
+
+/* MUI Card (exercise cards, etc.) */
+[class*="MuiCard-root"] {
+    background: var(--r12-surface) !important;
+    color: var(--r12-text) !important;
+    border: 1px solid var(--r12-border) !important;
+}
+
+/* MUI CardContent */
+[class*="MuiCardContent"] {
+    background: var(--r12-surface) !important;
+    color: var(--r12-text) !important;
+}
+
+/* MUI CardActions */
+[class*="MuiCardActions"] {
+    background: var(--r12-surface) !important;
+    border-top: 1px solid var(--r12-border) !important;
+}
+
+/* MUI Paper */
+[class*="MuiPaper-root"] {
+    background: var(--r12-surface) !important;
+    color: var(--r12-text) !important;
+}
+
+/* MUI Chip (category labels on cards) */
+[class*="MuiChip-root"] {
+    background: var(--r12-surface-2) !important;
+    color: var(--r12-text) !important;
+    border: 1px solid var(--r12-border) !important;
+}
+
+/* MUI Skeleton (loading placeholders) */
+[class*="MuiSkeleton-root"] {
+    background: var(--r12-surface-2) !important;
+}
+
+/* MUI List items */
+[class*="MuiListItem"] {
+    color: var(--r12-text) !important;
+}
+[class*="MuiListItemText"] span {
+    color: var(--r12-text) !important;
+}
+[class*="MuiListItemText"] p {
+    color: var(--r12-text-secondary) !important;
+}
+
+/* MUI Radio / Checkbox */
+[class*="MuiRadio-root"] {
+    color: var(--r12-text-muted) !important;
+}
+[class*="MuiRadio-root"].Mui-checked {
+    color: var(--r12-accent) !important;
+}
+
+/* MUI Switch */
+[class*="MuiSwitch-track"] {
+    background: var(--r12-surface-3) !important;
+}
+
+/* MUI Autocomplete / Popper dropdown */
+[class*="MuiAutocomplete-popper"] [class*="MuiPaper"] {
+    background: var(--r12-surface-2) !important;
+    border: 1px solid var(--r12-border) !important;
+}
+[class*="MuiAutocomplete-option"] {
+    color: var(--r12-text) !important;
+}
+[class*="MuiAutocomplete-option"]:hover,
+[class*="MuiAutocomplete-option"].Mui-focused {
+    background: var(--r12-surface-3) !important;
+}
+
+/* MUI TextField / Input (within React components) */
+[class*="MuiInputBase-root"] {
+    color: var(--r12-text) !important;
+}
+[class*="MuiInputBase-root"]::before {
+    border-bottom-color: var(--r12-border) !important;
+}
+[class*="MuiOutlinedInput-notchedOutline"] {
+    border-color: var(--r12-border) !important;
+}
+[class*="MuiInputLabel"] {
+    color: var(--r12-text-muted) !important;
+}
+
+/* MUI Button outlined variant */
+[class*="MuiButton-outlined"] {
+    color: var(--r12-accent) !important;
+    border-color: var(--r12-accent) !important;
+}
+[class*="MuiButton-outlined"]:hover {
+    background: rgba(92, 201, 160, 0.08) !important;
+}
+
+/* MUI Button contained variant */
+[class*="MuiButton-contained"] {
+    background: var(--r12-accent) !important;
+    color: var(--r12-bg) !important;
+}
+[class*="MuiButton-contained"]:hover {
+    background: #6AEDB8 !important;
+}
+
+/* MUI Typography secondary */
+[class*="MuiTypography-colorTextSecondary"] {
+    color: var(--r12-text-secondary) !important;
+}
+
+/* MUI Divider */
+[class*="MuiDivider"] {
+    border-color: var(--r12-border) !important;
+}
+
+/* MUI Tooltip */
+[class*="MuiTooltip-tooltip"] {
+    background: var(--r12-surface-3) !important;
+    color: var(--r12-text) !important;
+}
+
+/* MUI Menu / MenuList dropdown */
+[class*="MuiMenu-paper"] {
+    background: var(--r12-surface-2) !important;
+    border: 1px solid var(--r12-border) !important;
+}
+[class*="MuiMenuItem"] {
+    color: var(--r12-text) !important;
+}
+[class*="MuiMenuItem"]:hover {
+    background: var(--r12-surface-3) !important;
+}
+
+/* ---- REP12 text logo with underline hover (all pages) ---- */
+a.rep12-logo,
+a.rep12-logo:link,
+a.rep12-logo:visited {
+    font-family: "Outfit", sans-serif !important;
+    font-weight: 900 !important;
+    font-size: 1.6rem !important;
+    letter-spacing: 0.1em !important;
+    color: #DCDCDC !important;
+    text-decoration: none !important;
+    padding-bottom: 4px !important;
+    position: relative !important;
+    display: inline-block !important;
+}
+
+a.rep12-logo .logo-12 {
+    color: var(--r12-accent) !important;
+    transition: color 0.3s ease;
+}
+
+a.rep12-logo::after {
+    content: "" !important;
+    position: absolute !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 2px !important;
+    background: var(--r12-accent) !important;
+    transform: scaleX(0) !important;
+    transform-origin: right !important;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    display: block !important;
+}
+
+a.rep12-logo:hover::after {
+    transform: scaleX(1) !important;
+    transform-origin: left !important;
+}
+
+a.rep12-logo:hover {
+    color: #EDEDEF !important;
+    text-decoration: none !important;
+}
+
+a.rep12-logo:hover .logo-12 {
+    color: var(--r12-accent) !important;
+}
+
+/* =============================================
+   Exercise Overview — REP12 Brand Styling
+   ============================================= */
+
+/* Page title "Упражнения" */
+#react-page-no-shadow-dom [class*="MuiTypography-h"][class*="MuiTypography-root"]:first-of-type,
+#react-page-no-shadow-dom > main > div > div:first-child [class*="MuiTypography"] {
+    font-family: 'Outfit', sans-serif !important;
+    font-weight: 800 !important;
+    letter-spacing: -0.02em !important;
+    color: var(--r12-text) !important;
+}
+
+/* Category sidebar paper */
+#react-page-no-shadow-dom [class*="MuiPaper-root"] {
+    background: var(--r12-surface) !important;
+    border: 1px solid var(--r12-border) !important;
+    border-radius: var(--r12-radius) !important;
+    box-shadow: none !important;
+}
+
+/* Category sidebar heading */
+#react-page-no-shadow-dom h6[class*="MuiTypography"] {
+    font-family: 'Outfit', sans-serif !important;
+    font-weight: 700 !important;
+    color: var(--r12-text) !important;
+    text-transform: uppercase !important;
+    font-size: 0.85rem !important;
+    letter-spacing: 0.08em !important;
+}
+
+/* Category list items — dark separator lines */
+#react-page-no-shadow-dom [class*="MuiListItem"] {
+    border-bottom: 1px solid var(--r12-border) !important;
+}
+#react-page-no-shadow-dom [class*="MuiListItem"]:last-child {
+    border-bottom: none !important;
+}
+
+/* Category radio buttons — accent green when checked */
+#react-page-no-shadow-dom [class*="MuiRadio-root"] {
+    color: var(--r12-text-muted) !important;
+}
+#react-page-no-shadow-dom [class*="MuiRadio-root"][class*="Mui-checked"],
+#react-page-no-shadow-dom [class*="MuiRadio-root"].Mui-checked {
+    color: var(--r12-accent) !important;
+}
+
+/* Category label text */
+#react-page-no-shadow-dom [class*="MuiFormControlLabel"] [class*="MuiTypography"] {
+    font-family: 'Archivo', sans-serif !important;
+    font-size: 0.9rem !important;
+    color: var(--r12-text-secondary) !important;
+}
+
+/* Search autocomplete input */
+#react-page-no-shadow-dom [class*="MuiAutocomplete-root"] [class*="MuiOutlinedInput-root"] {
+    background: var(--r12-surface) !important;
+    border-radius: var(--r12-radius-sm) !important;
+}
+#react-page-no-shadow-dom [class*="MuiAutocomplete-root"] [class*="MuiOutlinedInput-notchedOutline"] {
+    border-color: var(--r12-border) !important;
+}
+#react-page-no-shadow-dom [class*="MuiAutocomplete-root"]:hover [class*="MuiOutlinedInput-notchedOutline"],
+#react-page-no-shadow-dom [class*="MuiAutocomplete-root"] [class*="Mui-focused"] [class*="MuiOutlinedInput-notchedOutline"] {
+    border-color: var(--r12-text-secondary) !important;
+}
+#react-page-no-shadow-dom [class*="MuiInputLabel"] {
+    color: var(--r12-text-muted) !important;
+    font-family: 'Archivo', sans-serif !important;
+}
+
+/* "Also search in English" switch label */
+#react-page-no-shadow-dom [class*="MuiSwitch-root"] + [class*="MuiTypography"],
+#react-page-no-shadow-dom [class*="MuiFormControlLabel"] > [class*="MuiTypography"] {
+    color: var(--r12-text-secondary) !important;
+    font-size: 0.85rem !important;
+}
+
+/* "ДОБАВИТЬ УПРАЖНЕНИЕ" button — outlined accent */
+#react-page-no-shadow-dom [class*="MuiButton-outlined"] {
+    border: 1px solid var(--r12-accent) !important;
+    color: var(--r12-accent) !important;
+    font-family: 'Archivo', sans-serif !important;
+    font-weight: 600 !important;
+    border-radius: var(--r12-radius-sm) !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.05em !important;
+    transition: all var(--r12-transition) !important;
+}
+#react-page-no-shadow-dom [class*="MuiButton-outlined"]:hover {
+    background: var(--r12-accent-dim) !important;
+    border-color: var(--r12-accent) !important;
+}
+
+/* Exercise cards */
+#react-page-no-shadow-dom [class*="MuiCard-root"] {
+    background: var(--r12-surface) !important;
+    border: 1px solid var(--r12-border) !important;
+    border-radius: var(--r12-radius) !important;
+    box-shadow: none !important;
+    overflow: hidden !important;
+    transition: all 0.25s ease !important;
+}
+#react-page-no-shadow-dom [class*="MuiCard-root"]:hover {
+    border-color: var(--r12-accent) !important;
+    box-shadow: 0 4px 20px rgba(68, 229, 163, 0.1) !important;
+    transform: translateY(-3px) !important;
+}
+
+/* Exercise card image area — no-image placeholder */
+#react-page-no-shadow-dom [class*="MuiCardActionArea"] > div:first-child,
+#react-page-no-shadow-dom [class*="MuiCardMedia"] {
+    background: var(--r12-surface-2) !important;
+}
+
+/* Exercise card content (title + equipment) */
+#react-page-no-shadow-dom [class*="MuiCardContent"] {
+    background: var(--r12-surface) !important;
+    padding: 1rem !important;
+}
+
+/* Exercise card title */
+#react-page-no-shadow-dom [class*="MuiCardContent"] [class*="MuiTypography-h"] {
+    font-family: 'Outfit', sans-serif !important;
+    font-weight: 700 !important;
+    font-size: 1rem !important;
+    color: var(--r12-text) !important;
+    line-height: 1.3 !important;
+}
+
+/* Exercise card subtitle (equipment) */
+#react-page-no-shadow-dom [class*="MuiCardContent"] [class*="MuiTypography-body"] {
+    color: var(--r12-text-secondary) !important;
+    font-size: 0.8rem !important;
+}
+
+/* Category chip on cards */
+#react-page-no-shadow-dom [class*="MuiChip-root"] {
+    background: rgba(68, 229, 163, 0.15) !important;
+    color: var(--r12-accent) !important;
+    border: none !important;
+    font-size: 0.7rem !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.05em !important;
+}
+
+/* Pagination */
+#react-page-no-shadow-dom [class*="MuiPagination"] [class*="MuiButtonBase"] {
+    color: var(--r12-text-secondary) !important;
+    border: 1px solid var(--r12-border) !important;
+    border-radius: var(--r12-radius-sm) !important;
+}
+#react-page-no-shadow-dom [class*="MuiPagination"] [class*="Mui-selected"] {
+    background: var(--r12-accent) !important;
+    color: var(--r12-bg) !important;
+    border-color: var(--r12-accent) !important;
+}
+
+/* Skeleton loading — match dark surfaces */
+#react-page-no-shadow-dom [class*="MuiSkeleton"] {
+    background: var(--r12-surface-2) !important;
+}
+
+/* SVG placeholder icon color */
+#react-page-no-shadow-dom [class*="MuiCard"] svg {
+    color: var(--r12-text-muted) !important;
+    opacity: 0.4 !important;
+}
+
+/* =============================================
+   Exercise Overview — Round 2 Fixes
+   ============================================= */
+
+/* Fix white-background exercise images: invert to dark */
+#react-page-no-shadow-dom [class*="MuiCardMedia"] img,
+#react-page-no-shadow-dom [class*="MuiCardActionArea"] img {
+    background: var(--r12-surface-2) !important;
+}
+/* Images with white bg: apply dark filter */
+#react-page-no-shadow-dom [class*="MuiCard"] [class*="MuiBox-root"] {
+    background: var(--r12-surface-2) !important;
+}
+/* White-bg exercise illustrations: blend with dark theme */
+#react-page-no-shadow-dom [class*="MuiCardMedia-root"],
+#react-page-no-shadow-dom [class*="MuiCardActionArea"] > div:first-child {
+    background: var(--r12-surface-2) !important;
+    position: relative !important;
+}
+/* Make white-bg images darker via mix-blend-mode */
+#react-page-no-shadow-dom [class*="MuiCard"] img[src*="exercise"] {
+}
+
+/* Category sidebar — remove ugly table dividers */
+#react-page-no-shadow-dom [class*="MuiList-root"] [class*="MuiDivider"],
+#react-page-no-shadow-dom [class*="MuiListItem"] {
+    border: none !important;
+    border-bottom: none !important;
+}
+/* Category sidebar list — clean spacing */
+#react-page-no-shadow-dom [class*="MuiList-root"] {
+    padding: 0.5rem !important;
+}
+#react-page-no-shadow-dom [class*="MuiListItem-root"] {
+    border-radius: var(--r12-radius-sm) !important;
+    margin: 2px 0 !important;
+    padding: 4px 8px !important;
+    transition: background 0.2s ease !important;
+}
+#react-page-no-shadow-dom [class*="MuiListItem-root"]:hover {
+    background: var(--r12-surface-2) !important;
+}
+
+/* Remove all MuiDivider in the exercise page */
+#react-page-no-shadow-dom hr[class*="MuiDivider"] {
+    display: none !important;
+}
+
+/* Search field — rounded, neutral border */
+#react-page-no-shadow-dom [class*="MuiAutocomplete-root"] [class*="MuiOutlinedInput-root"] {
+    border-radius: 24px !important;
+    background: var(--r12-surface) !important;
+    padding-left: 8px !important;
+}
+#react-page-no-shadow-dom [class*="MuiAutocomplete-root"] [class*="MuiOutlinedInput-notchedOutline"] {
+    border-color: var(--r12-border) !important;
+    border-width: 1px !important;
+    border-radius: 24px !important;
+}
+#react-page-no-shadow-dom [class*="MuiAutocomplete-root"]:hover [class*="MuiOutlinedInput-notchedOutline"] {
+    border-color: var(--r12-text-secondary) !important;
+}
+#react-page-no-shadow-dom [class*="MuiAutocomplete-root"] [class*="Mui-focused"] [class*="MuiOutlinedInput-notchedOutline"] {
+    border-color: var(--r12-text-secondary) !important;
+    border-width: 1.5px !important;
+    box-shadow: none !important;
+}
+/* Search label float — match rounded field */
+#react-page-no-shadow-dom [class*="MuiAutocomplete-root"] [class*="MuiInputLabel-root"] {
+    padding-left: 8px !important;
+}
+
+/* ---- Fix: Search autocomplete dropdown — remove grid lines ---- */
+[class*="MuiAutocomplete-popper"] [class*="MuiPaper"] {
+    background: var(--r12-surface) !important;
+    border: 1px solid var(--r12-border) !important;
+    border-radius: 12px !important;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.5) !important;
+    overflow: hidden !important;
+}
+[class*="MuiAutocomplete-listbox"] {
+    padding: 4px 0 !important;
+    background: transparent !important;
+}
+[class*="MuiAutocomplete-option"] {
+    color: var(--r12-text) !important;
+    border: none !important;
+    border-bottom: none !important;
+    padding: 8px 12px !important;
+    transition: background 0.15s ease !important;
+}
+[class*="MuiAutocomplete-option"]:hover,
+[class*="MuiAutocomplete-option"].Mui-focused {
+    background: rgba(68, 229, 163, 0.08) !important;
+}
+[class*="MuiAutocomplete-option"] + [class*="MuiAutocomplete-option"] {
+    border-top: none !important;
+}
+[class*="MuiAutocomplete-listbox"] li {
+    border: none !important;
+    border-bottom: none !important;
+    outline: none !important;
+}
+/* Remove inner grid/table/divider borders in suggestions */
+[class*="MuiAutocomplete-listbox"] [class*="MuiGrid"],
+[class*="MuiAutocomplete-listbox"] [class*="MuiBox"],
+[class*="MuiAutocomplete-listbox"] [class*="MuiStack"],
+[class*="MuiAutocomplete-listbox"] [class*="MuiDivider"],
+[class*="MuiAutocomplete-listbox"] hr {
+    border: none !important;
+    border-color: transparent !important;
+}
+/* Suggestion image thumbnails */
+[class*="MuiAutocomplete-listbox"] img {
+    border-radius: 6px !important;
+    border: none !important;
+}
+/* Suggestion text */
+[class*="MuiAutocomplete-listbox"] [class*="MuiTypography"] {
+    color: var(--r12-text) !important;
+}
+[class*="MuiAutocomplete-listbox"] [class*="MuiTypography-body2"],
+[class*="MuiAutocomplete-listbox"] [class*="MuiTypography-caption"] {
+    color: var(--r12-text-secondary) !important;
+}
+
+/* ---- Fix: Bottom white block (empty state / contribute) ---- */
+#react-page-no-shadow-dom [class*="MuiPaper-root"] {
+    background: var(--r12-surface) !important;
+    background-color: var(--r12-surface) !important;
+    color: var(--r12-text) !important;
+    border: 1px solid var(--r12-border) !important;
+    border-radius: 12px !important;
+}
+#react-page-no-shadow-dom [class*="MuiCard-root"] {
+    background: var(--r12-surface) !important;
+    background-color: var(--r12-surface) !important;
+    color: var(--r12-text) !important;
+}
+a[href*="/exercise/contribute"] {
+    color: var(--r12-accent) !important;
+}
+
+}
+
+/* "Missing exercise" bottom banner — inline #ebebeb override */
+#react-page-no-shadow-dom [class*="MuiPaper"][style*="ebebeb"],
+#react-page-no-shadow-dom [class*="MuiPaper"][style*="background"] {
+    background-color: var(--r12-surface) !important;
+    color: var(--r12-text) !important;
+    border: 1px solid var(--r12-border) !important;
+    border-radius: var(--r12-radius) !important;
+}
+
+/* Search popper - constrain to viewport */
+[class*="MuiAutocomplete-popper"] {
+    max-width: calc(100vw - 32px) !important;
+    left: 16px !important;
+    right: 16px !important;
+}
+[class*="MuiAutocomplete-popper"] [class*="MuiPaper"] {
+    max-width: 100% !important;
+    overflow: hidden !important;
+}
+[class*="MuiAutocomplete-listbox"] {
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+}
+
+/* ---- Exercise detail: Image carousel (scroll-snap) ---- */
+/* Convert MUI ImageList into horizontal carousel */
+#react-page-no-shadow-dom [class*="MuiImageList-root"] {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    scroll-snap-type: x mandatory !important;
+    scroll-behavior: smooth !important;
+    gap: 0 !important;
+    max-height: none !important;
+    height: auto !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border-radius: 12px !important;
+    background: var(--r12-surface-2) !important;
+    /* Hide scrollbar but keep functionality */
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+}
+#react-page-no-shadow-dom [class*="MuiImageList-root"]::-webkit-scrollbar {
+    display: none !important;
+}
+/* Each image item — full-width snap point */
+#react-page-no-shadow-dom [class*="MuiImageList-root"] > [class*="MuiImageListItem"] {
+    flex: 0 0 100% !important;
+    width: 100% !important;
+    min-width: 100% !important;
+    height: auto !important;
+    max-height: 400px !important;
+    scroll-snap-align: start !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    position: relative !important;
+    overflow: hidden !important;
+}
+#react-page-no-shadow-dom [class*="MuiImageList-root"] > [class*="MuiImageListItem"] img {
+    max-width: 100% !important;
+    max-height: 400px !important;
+    width: auto !important;
+    height: auto !important;
+    object-fit: contain !important;
+    border-radius: 8px !important;
+}
+
+/* Carousel navigation dots via CSS counter */
+#react-page-no-shadow-dom [class*="MuiImageList-root"]::after {
+    content: '' !important;
+    display: block !important;
+    flex: 0 0 1px !important;
+}
+
+/* Dot indicators below carousel */
+#react-page-no-shadow-dom [class*="MuiImageList-root"] + div,
+#react-page-no-shadow-dom [class*="MuiImageList-root"] ~ [class*="MuiBox"] {
+    text-align: center !important;
+}
+
+/* ---- Exercise card overview: fixed height, image fits inside ---- */
+#react-page-no-shadow-dom [class*="MuiCardMedia-root"] {
+    height: 220px !important;
+    max-height: 220px !important;
+    overflow: hidden !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: var(--r12-surface-2) !important;
+    position: relative !important;
+}
+#react-page-no-shadow-dom [class*="MuiCardMedia-root"] img,
+#react-page-no-shadow-dom [class*="MuiCardActionArea"] img[src*="exercise-images"] {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+    object-position: center center !important;
+    background: var(--r12-surface-2) !important;
+}
+
+/* ---- Exercise detail: Image carousel (scroll-snap) ---- */
+/* Convert MUI ImageList into horizontal carousel */
+#react-page-no-shadow-dom [class*="MuiImageList-root"] {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    scroll-snap-type: x mandatory !important;
+    scroll-behavior: smooth !important;
+    gap: 0 !important;
+    max-height: none !important;
+    height: auto !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border-radius: 12px !important;
+    background: var(--r12-surface-2) !important;
+    /* Hide scrollbar but keep functionality */
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+}
+#react-page-no-shadow-dom [class*="MuiImageList-root"]::-webkit-scrollbar {
+    display: none !important;
+}
+/* Each image item — full-width snap point */
+#react-page-no-shadow-dom [class*="MuiImageList-root"] > [class*="MuiImageListItem"] {
+    flex: 0 0 100% !important;
+    width: 100% !important;
+    min-width: 100% !important;
+    height: auto !important;
+    max-height: 400px !important;
+    scroll-snap-align: start !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    position: relative !important;
+    overflow: hidden !important;
+}
+#react-page-no-shadow-dom [class*="MuiImageList-root"] > [class*="MuiImageListItem"] img {
+    max-width: 100% !important;
+    max-height: 400px !important;
+    width: auto !important;
+    height: auto !important;
+    object-fit: contain !important;
+    border-radius: 8px !important;
+}
+
+/* Carousel navigation dots via CSS counter */
+#react-page-no-shadow-dom [class*="MuiImageList-root"]::after {
+    content: '' !important;
+    display: block !important;
+    flex: 0 0 1px !important;
+}
+
+/* Dot indicators below carousel */
+#react-page-no-shadow-dom [class*="MuiImageList-root"] + div,
+#react-page-no-shadow-dom [class*="MuiImageList-root"] ~ [class*="MuiBox"] {
+    text-align: center !important;
+}
+
+
+
+/* ---- Carousel UI elements ---- */
+.r12-carousel-wrapper {
+    position: relative;
+    width: 100%;
+    margin: 16px 0;
+}
+.r12-carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-60%);
+    z-index: 10;
+    background: rgba(0,0,0,0.6);
+    color: #fff;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+    backdrop-filter: blur(4px);
+    line-height: 1;
+}
+.r12-carousel-btn:hover {
+    background: rgba(68, 229, 163, 0.4);
+}
+.r12-carousel-prev { left: 8px; }
+.r12-carousel-next { right: 8px; }
+.r12-carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 0 4px;
+}
+.r12-carousel-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.25);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.r12-carousel-dot.active {
+    background: #44E5A3;
+    transform: scale(1.3);
+}
+.r12-carousel-counter {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: rgba(0,0,0,0.6);
+    color: #C9C9C9;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 13px;
+    font-family: 'Archivo', sans-serif;
+    backdrop-filter: blur(4px);
+    z-index: 10;
+}
+
+/* ---- Lightbox ---- */
+.r12-lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+}
+.r12-lightbox.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+.r12-lb-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.92);
+    backdrop-filter: blur(12px);
+}
+.r12-lb-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    z-index: 10;
+    background: rgba(255,255,255,0.1);
+    color: #fff;
+    border: none;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    font-size: 28px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+    line-height: 1;
+}
+.r12-lb-close:hover {
+    background: rgba(255,255,255,0.2);
+}
+.r12-lb-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    background: rgba(255,255,255,0.08);
+    color: #fff;
+    border: none;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    font-size: 32px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+    line-height: 1;
+}
+.r12-lb-arrow:hover {
+    background: rgba(68, 229, 163, 0.3);
+}
+.r12-lb-prev { left: 16px; }
+.r12-lb-next { right: 16px; }
+.r12-lb-img-wrap {
+    position: relative;
+    z-index: 5;
+    max-width: 90vw;
+    max-height: 85vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    touch-action: none;
+}
+.r12-lb-img {
+    max-width: 90vw;
+    max-height: 85vh;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    border-radius: 8px;
+    transition: transform 0.2s ease;
+    user-select: none;
+    -webkit-user-drag: none;
+}
+.r12-lb-counter {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    background: rgba(0,0,0,0.6);
+    color: #C9C9C9;
+    padding: 6px 16px;
+    border-radius: 16px;
+    font-size: 14px;
+    font-family: 'Archivo', sans-serif;
+    backdrop-filter: blur(4px);
+}
+
+/* ---- Muscle diagram: visible on dark theme ---- */
+#react-page-no-shadow-dom div[style*="muscular_system_front"],
+#react-page-no-shadow-dom div[style*="muscular_system_back"] {
+    filter: invert(0.82) hue-rotate(180deg) !important;
+    background-color: #fff !important;
+    background-size: contain !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    border-radius: 12px !important;
+    max-width: calc(100% - 6px) !important;
+    box-sizing: border-box !important;
+    margin: 0 3px !important;
+}
+
+/* ===================== */
+/* Gym / Trainer pages   */
+/* ===================== */
+
+/* Old Bootstrap badge-primary (no bg- prefix) */
+.badge-primary { background: var(--r12-accent) !important; color: var(--r12-bg) !important; }
+
+/* DataTables dark theme */
+.dataTables_wrapper .dataTables_filter input {
+    background: var(--r12-surface) !important;
+    color: var(--r12-text) !important;
+    border: 1px solid var(--r12-border) !important;
+    border-radius: 6px !important;
+    padding: 0.4rem 0.8rem !important;
+}
+.dataTables_wrapper .dataTables_filter label { color: var(--r12-text-secondary) !important; }
+.datatable-title h4 { color: var(--r12-text) !important; }
+table.dataTable thead th { border-bottom-color: var(--r12-border) !important; }
+table.dataTable tbody tr { background: transparent !important; }
+table.dataTable tbody tr:hover { background: var(--r12-surface) !important; }
+
+/* Gym sidebar tables */
+.col-md-4 .table td,
+.col-md-4 .table th,
+#sidebar .table td,
+#sidebar .table th { border-color: var(--r12-border) !important; }
+
+/* Gym user overview page */
+.btn-success { background: var(--r12-accent) !important; color: var(--r12-bg) !important; border-color: var(--r12-accent) !important; }
+.btn-success:hover { opacity: 0.85; }
+
+/* Modal dark theme */
+.modal-content { background: var(--r12-surface) !important; color: var(--r12-text) !important; border-color: var(--r12-border) !important; }
+.modal-header { border-color: var(--r12-border) !important; }
+.modal-footer { border-color: var(--r12-border) !important; }
+.modal-title { color: var(--r12-text) !important; }
+.btn-close { filter: invert(1) !important; }
+
+/* User overview / profile page */
+h2.page-header, h3, h4, h5 { color: var(--r12-text) !important; }
+.page-header hr { border-color: var(--r12-border) !important; }
+
+/* Hide gym clutter: contracts, contract types/options, email lists */
+/* These sections use h4/h5 headers we can target */
+a[href*="contract-type"],
+a[href*="contract-option"],
+a[href*="contract:add"],
+a[href*="contract:list"],
+a[href*="email:email"] { display: none !important; }
+
+/* Gym config: hide inactive members admin noise */
+[href*="inactive"] { display: none !important; }
+
+/* ===== Exercise image fixes: force dark background ===== */
+/* Dark container for all exercise images */
+#react-page-no-shadow-dom [class*="MuiCardMedia-root"],
+#react-page-no-shadow-dom [class*="MuiCardActionArea"] > div:first-child {
+    background: #1a1a1a !important;
+}
+
+/* Exercise images: dark bg + multiply blend makes white bg disappear */
+#react-page-no-shadow-dom img[src*="exercise-images"] {
+    background: transparent !important;
+    mix-blend-mode: screen !important;
+    filter: invert(1) !important;
+}
+
+/* Exercise detail page: same treatment for gallery images */
+#react-page-no-shadow-dom [class*="MuiBox"] > img[src*="exercise-images"],
+#react-page-no-shadow-dom [class*="MuiDialog"] img[src*="exercise-images"] {
+    mix-blend-mode: screen !important;
+    filter: invert(1) !important;
+}
+
+/* Make category/equipment/muscle chips clickable-looking */
+#react-page-no-shadow-dom [class*="MuiChip-root"] {
+    cursor: pointer !important;
+    transition: background 0.2s, border-color 0.2s !important;
+}
+#react-page-no-shadow-dom [class*="MuiChip-root"]:hover {
+    background: var(--r12-accent) !important;
+    color: #0F0F0F !important;
+}
+
+/* Hide duplicate exercise info table if present */
+#react-page-no-shadow-dom table + table {
+    display: none !important;
+}
+
+/* Exercise detail: make tags look clickable with pointer + underline */
+#react-page-no-shadow-dom [class*="MuiChip-label"] {
+    text-decoration: none !important;
+}
+#react-page-no-shadow-dom [class*="MuiChip-root"]:hover [class*="MuiChip-label"] {
+    text-decoration: underline !important;
+}
+
+/* ===== Exercise detail: hide broken "Variants" section ===== */
+/* The variants section shows random exercises instead of actual variants */
+#react-page-no-shadow-dom h2:has(+ div [class*="MuiCard"]):last-of-type,
+#react-page-no-shadow-dom h2:last-of-type ~ div {
+    display: none !important;
+}
+
+/* Hide "The content on this page is available under the" English text */
+#react-page-no-shadow-dom [class*="MuiTypography"][class*="body2"]:has(a[href*="creativecommons"]) {
+    display: none !important;
+}
+/* Hide "Authors: ... Last update:" English text */
+#react-page-no-shadow-dom [class*="MuiTypography"][class*="caption"] {
+    display: none !important;
+}
+
+/* ===== Exercise overview: hide "Add exercise" button for non-admins ===== */
+/* This is handled by React, but CSS fallback for unauth users */
+#react-page-no-shadow-dom a[href="/exercise/contribute"] {
+    display: none !important;
+}
+#react-page-no-shadow-dom [class*="MuiPaper"] > [class*="MuiTypography"]:has(a[href="/exercise/contribute"]) {
+    display: none !important;
+}
+/* ===== Trophies page ===== */
+.r12-trophy {
+    background: #191919;
+    border: 1px solid #2a2a2a;
+    border-radius: 12px;
+    padding: 1.2rem 1rem;
+    text-align: center;
+    height: 100%;
+    transition: border-color 0.2s, transform 0.2s;
+}
+.r12-trophy:hover {
+    border-color: #44E5A3;
+    transform: translateY(-2px);
+}
+.r12-trophy--earned {
+    border-color: #44E5A3;
+    box-shadow: 0 0 20px rgba(68, 229, 163, 0.1);
+}
+.r12-trophy--locked {
+    opacity: 0.45;
+    filter: grayscale(1);
+}
+.r12-trophy--locked:hover {
+    opacity: 0.7;
+    filter: grayscale(0.5);
+}
+.r12-trophy__icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 0.8rem;
+}
+.r12-trophy__icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+.r12-trophy__name {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    color: #DCDCDC;
+    margin-bottom: 0.3rem;
+}
+.r12-trophy__desc {
+    font-size: 0.8rem;
+    color: #888;
+    line-height: 1.3;
+}
+.r12-trophy__date {
+    font-size: 0.75rem;
+    color: #44E5A3;
+    margin-top: 0.5rem;
+}
+
+/* ===== Calendar: fix unreadable text ===== */
+#react-page-no-shadow-dom [class*="MuiPaper"] {
+    background-color: #191919 !important;
+    color: #DCDCDC !important;
+}
+#react-page-no-shadow-dom table th,
+#react-page-no-shadow-dom table td {
+    color: #DCDCDC !important;
+}
+#react-page-no-shadow-dom [class*="MuiTypography"] {
+    color: #DCDCDC !important;
+}
+#react-page-no-shadow-dom [class*="MuiIconButton"] {
+    color: #44E5A3 !important;
+}
+/* Calendar day cells */
+#react-page-no-shadow-dom [class*="MuiPickersDay"],
+#react-page-no-shadow-dom button[class*="PickersDay"] {
+    color: #DCDCDC !important;
+}
+#react-page-no-shadow-dom [class*="MuiPickersDay"][class*="selected"],
+#react-page-no-shadow-dom [class*="Mui-selected"] {
+    background-color: #44E5A3 !important;
+    color: #0F0F0F !important;
+}
+/* Calendar sidebar items */
+#react-page-no-shadow-dom [class*="MuiAccordion"] {
+    background-color: #191919 !important;
+    color: #DCDCDC !important;
+}
+#react-page-no-shadow-dom [class*="MuiAccordionSummary"] {
+    color: #DCDCDC !important;
+}
+#react-page-no-shadow-dom [class*="MuiAccordionDetails"] {
+    color: #DCDCDC !important;
+}
+/* Fix input fields in React pages */
+#react-page-no-shadow-dom [class*="MuiInputBase"],
+#react-page-no-shadow-dom [class*="MuiOutlinedInput"],
+#react-page-no-shadow-dom input,
+#react-page-no-shadow-dom select {
+    color: #DCDCDC !important;
+}
+#react-page-no-shadow-dom [class*="MuiInputLabel"] {
+    color: #888 !important;
+}
+/* Fix slider/range for BMI */
+#react-page-no-shadow-dom [class*="MuiSlider-thumb"] {
+    color: #44E5A3 !important;
+}
+#react-page-no-shadow-dom [class*="MuiSlider-track"] {
+    color: #44E5A3 !important;
+}
+#react-page-no-shadow-dom [class*="MuiSlider-rail"] {
+    color: #333 !important;
+}
+/* Tabs */
+#react-page-no-shadow-dom [class*="MuiTab"][class*="selected"],
+#react-page-no-shadow-dom [class*="Mui-selected"][role="tab"] {
+    color: #44E5A3 !important;
+}
+#react-page-no-shadow-dom [class*="MuiTabs-indicator"] {
+    background-color: #44E5A3 !important;
+}
+/* Links inside React */
+#react-page-no-shadow-dom a {
+    color: #44E5A3 !important;
+}
+/* Buttons */
+#react-page-no-shadow-dom [class*="MuiButton-contained"] {
+    background-color: #44E5A3 !important;
+    color: #0F0F0F !important;
+}
+#react-page-no-shadow-dom [class*="MuiButton-outlined"] {
+    border-color: #44E5A3 !important;
+    color: #44E5A3 !important;
+}
+/* Fix dark background for all React containers */
+#react-page-no-shadow-dom [class*="MuiContainer"],
+#react-page-no-shadow-dom [class*="MuiBox"] {
+    background-color: transparent !important;
+}
+/* Dividers */
+#react-page-no-shadow-dom [class*="MuiDivider"] {
+    border-color: #2a2a2a !important;
+}

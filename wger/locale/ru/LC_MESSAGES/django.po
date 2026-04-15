@@ -116,9 +116,7 @@ msgstr "Сохранить"
 
 #: core/forms.py:211
 msgid "Used for password resets and, optionally, email reminders."
-msgstr ""
-"Необходимо для возобновлений пароля, и выборочно, напоминаний по электронной "
-"почте."
+msgstr "Используется для сброса пароля и уведомлений по e-mail."
 
 #: core/forms.py:240
 msgid "This e-mail address is already in use."
@@ -240,7 +238,7 @@ msgstr "Показать комментарии к упражнению"
 
 #: core/models/profile.py:120
 msgid "Check to show exercise comments on the workout view"
-msgstr ""
+msgstr "Отметьте, чтобы показывать комментарии к упражнениям в тренировке"
 "Поставьте галочку, для показа комментариев к упражнению в обзоре тренировки"
 
 #: core/models/profile.py:130
@@ -278,7 +276,7 @@ msgstr "Напомнить до истечения срока действия"
 
 #: core/models/profile.py:153
 msgid "The number of days you want to be reminded before a workout expires."
-msgstr ""
+msgstr "За сколько дней до окончания тренировки вы хотите получить напоминание."
 "Количество дней до истечении срока действия тренировки, на которое вы хотите "
 "установить напоминание."
 
@@ -388,11 +386,11 @@ msgstr "Количество дней после последней записи
 
 #: core/models/profile.py:379
 msgid "Enable trophies"
-msgstr ""
+msgstr "Включить трофеи"
 
 #: core/models/profile.py:380
 msgid "Enable or disable the trophy system for this user"
-msgstr ""
+msgstr "Включить или отключить систему трофеев для этого пользователя"
 
 #: core/models/profile.py:446
 msgid "The sum of all hours has to be 24"
@@ -498,7 +496,7 @@ msgstr "Календарь для %(username)s"
 #: core/templates/email_verification/email_body_html.tpl:11
 #, python-format
 msgid "Please click <a href=\"%(link)s\">here</a> to confirm your email"
-msgstr ""
+msgstr "Пожалуйста, нажмите <a href=\"%(link)s\">здесь</a>, чтобы подтвердить вашу электронную почту"
 "Пожалуйста, нажмите <a href=\"%(link)s\"> здесь </a>, чтобы подтвердить вашу "
 "электронную почту"
 
@@ -516,7 +514,7 @@ msgstr "Команда wger"
 #: core/templates/email_verification/email_body_txt.tpl:4
 #, python-format
 msgid "Please click the following link to confirm your email: %(link)s"
-msgstr ""
+msgstr "Пожалуйста, перейдите по следующей ссылке для подтверждения электронной почты: %(link)s"
 "Пожалуйста, перейдите по ссылке, чтобы подтвердить вашу электронную почту: "
 "%(link)s"
 
@@ -588,7 +586,7 @@ msgstr "Ничего не найдено"
 
 #: core/templates/misc/about.html:4 core/templates/template.html:160
 msgid "Imprint"
-msgstr "Отпечаток"
+msgstr "Контакты"
 
 #: core/templates/navigation.html:28 software/templates/features.html:458
 msgid "Training"
@@ -596,11 +594,15 @@ msgstr "Тренировка"
 
 #: core/templates/navigation.html:37 core/templates/user/overview.html:25
 msgid "Routines"
-msgstr "Рутина"
+msgstr "Программы"
 
 #: core/templates/navigation.html:45 core/templates/user/overview.html:70
 msgid "Calendar"
 msgstr "Календарь"
+
+#: nutrition/templates/ingredient/view.html:20
+msgid "Ingredients"
+msgstr "Ингредиенты"
 
 #: core/templates/navigation.html:55
 msgid "Measurements"
@@ -684,11 +686,11 @@ msgstr "Обзор веса"
 
 #: core/templates/navigation.html:217
 msgid "About this software"
-msgstr "Об этой программе"
+msgstr "О платформе"
 
 #: core/templates/navigation.html:223 software/templates/about_us.html:5
 msgid "Support & Get Involved"
-msgstr "Поддерживайте и принимайте участие"
+msgstr "О проекте"
 
 #: core/templates/navigation.html:229 software/templates/features.html:528
 msgid "REST API"
@@ -748,7 +750,7 @@ msgstr "Тренажерные залы"
 #: core/templates/navigation.html:403
 #: trophies/templates/trophies/overview.html:7
 msgid "Trophies"
-msgstr ""
+msgstr "Трофеи"
 
 #: core/templates/registration/password_reset_complete.html:4
 msgid "Password reset complete"
@@ -1114,7 +1116,7 @@ msgstr "Отправить электронное письмо с подтвер
 
 #: core/templates/user/preferences.html:31
 msgid "You need to verify your email to contribute exercises"
-msgstr ""
+msgstr "Для добавления упражнений необходимо подтвердить электронную почту"
 "Вам необходимо подтвердить свой адрес электронной почты, чтобы добавлять "
 "упражнения"
 
@@ -1124,7 +1126,7 @@ msgstr "Изменить"
 
 #: core/templates/user/registration_sidebar.html:8
 msgid "Already have an account?"
-msgstr ""
+msgstr "Уже есть аккаунт?"
 
 #: core/templatetags/wger_extras.py:142 i18n.tpl:38
 msgid "kg"
@@ -1346,12 +1348,12 @@ msgstr "Генеральный менеджер"
 
 #: gym/forms.py:98
 msgid "Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only."
-msgstr ""
+msgstr "Обязательное поле. Не более 30 символов. Только буквы, цифры и символы @/./+/-/_."
 "Обязательно. Не более 30 символов. Только буквы, цифры и @/. / +/-/ _ ."
 
 #: gym/forms.py:100
 msgid "This value may contain only letters, numbers and @/.//-/_ characters."
-msgstr ""
+msgstr "Это значение может содержать только буквы, цифры и символы @/.//-/_."
 "Это значение может содержать только буквы, цифры и символы @/. / /-/ _ ."
 
 #: gym/forms.py:114
@@ -1788,7 +1790,7 @@ msgstr "Никакое (упражнение с весом тела)"
 
 #: i18n.tpl:41
 msgid "Beginner"
-msgstr ""
+msgstr "Новичок"
 
 #: i18n.tpl:42
 #, fuzzy
@@ -1799,11 +1801,11 @@ msgstr "Содержание"
 
 #: i18n.tpl:43
 msgid "Dedicated"
-msgstr ""
+msgstr "Преданный делу"
 
 #: i18n.tpl:44
 msgid "Obsessed"
-msgstr ""
+msgstr "Одержимый"
 
 #: i18n.tpl:45
 msgid "Legend"
@@ -1811,51 +1813,51 @@ msgstr "Условное обозначение"
 
 #: i18n.tpl:46
 msgid "Veteran"
-msgstr ""
+msgstr "Ветеран"
 
 #: i18n.tpl:47
 msgid "Titan"
-msgstr ""
+msgstr "Титан"
 
 #: i18n.tpl:48
 msgid "Unstoppable"
-msgstr ""
+msgstr "Неудержимый"
 
 #: i18n.tpl:49
 msgid "Weekend Warrior"
-msgstr ""
+msgstr "Воин выходного дня"
 
 #: i18n.tpl:50
 msgid "Elephant lifter"
-msgstr ""
+msgstr "Поднимает слона"
 
 #: i18n.tpl:51
 msgid "Bus lifter"
-msgstr ""
+msgstr "Поднимает автобус"
 
 #: i18n.tpl:52
 msgid "Plane lifter"
-msgstr ""
+msgstr "Поднимает самолёт"
 
 #: i18n.tpl:53
 msgid "Blue whale lifter"
-msgstr ""
+msgstr "Поднимает синего кита"
 
 #: i18n.tpl:54
 msgid "Space Station lifter"
-msgstr ""
+msgstr "Поднимает космическую станцию"
 
 #: i18n.tpl:55
 msgid "Millionaire"
-msgstr ""
+msgstr "Миллионер"
 
 #: i18n.tpl:56
 msgid "Atlas"
-msgstr ""
+msgstr "Атлас"
 
 #: i18n.tpl:57
 msgid "Early Bird"
-msgstr ""
+msgstr "Ранняя пташка"
 
 #: i18n.tpl:58
 #, fuzzy
@@ -1865,11 +1867,11 @@ msgstr "Регистрация веса"
 
 #: i18n.tpl:59
 msgid "New Year, New Me"
-msgstr ""
+msgstr "Новый год — новый я"
 
 #: i18n.tpl:60
 msgid "Phoenix"
-msgstr ""
+msgstr "Феникс"
 
 #: i18n.tpl:61
 #, fuzzy
@@ -1921,47 +1923,47 @@ msgstr "Пример тренировки"
 
 #: i18n.tpl:69
 msgid "Maintain a 30-day workout streak"
-msgstr ""
+msgstr "Поддерживайте серию тренировок в течение 30 дней"
 
 #: i18n.tpl:70
 msgid "Work out on Saturday and Sunday for 4 consecutive weekends"
-msgstr ""
+msgstr "Тренируйтесь в субботу и воскресенье 4 выходных подряд"
 
 #: i18n.tpl:71
 msgid "Lift a cumulative total of 5.000 kg"
-msgstr ""
+msgstr "Поднимите в сумме 5 000 кг"
 
 #: i18n.tpl:72
 msgid "Lift a cumulative total of 20.000 kg"
-msgstr ""
+msgstr "Поднимите в сумме 20 000 кг"
 
 #: i18n.tpl:73
 msgid "Lift a cumulative total of 50.000 kg"
-msgstr ""
+msgstr "Поднимите в сумме 50 000 кг"
 
 #: i18n.tpl:74
 msgid "Lift a cumulative total of 150.000 kg"
-msgstr ""
+msgstr "Поднимите в сумме 150 000 кг"
 
 #: i18n.tpl:75
 msgid "Lift a cumulative total of 450.000 kg"
-msgstr ""
+msgstr "Поднимите в сумме 450 000 кг"
 
 #: i18n.tpl:76
 msgid "Lift a cumulative total of 1.000.000 kg"
-msgstr ""
+msgstr "Поднимите в сумме 1 000 000 кг"
 
 #: i18n.tpl:77
 msgid "Lift a cumulative total of 10.000.000 kg"
-msgstr ""
+msgstr "Поднимите в сумме 10 000 000 кг"
 
 #: i18n.tpl:78
 msgid "Complete a workout before 6:00 AM"
-msgstr ""
+msgstr "Завершите тренировку до 6:00 утра"
 
 #: i18n.tpl:79
 msgid "Complete a workout after 9:00 PM"
-msgstr ""
+msgstr "Завершите тренировку после 21:00"
 
 #: i18n.tpl:80
 #, fuzzy
@@ -1971,11 +1973,11 @@ msgstr "Тренировка для %s"
 
 #: i18n.tpl:81
 msgid "Return to training after being inactive for 30 days"
-msgstr ""
+msgstr "Вернитесь к тренировкам после 30 дней перерыва"
 
 #: i18n.tpl:82
 msgid "Achieve a new Personal Record on any exercise"
-msgstr ""
+msgstr "Установите новый личный рекорд в любом упражнении"
 
 #: mailer/forms.py:34 mailer/templates/mailer/gym/preview.html:32
 msgctxt "As in \"email subject\""
@@ -2146,7 +2148,7 @@ msgstr "Тренировка для %s"
 
 #: nutrition/forms.py:62
 msgid "Unit"
-msgstr "Секция"
+msgstr "Единица"
 
 #: nutrition/forms.py:170 nutrition/templates/rate/form.html:76
 msgid "Basic caloric intake"
@@ -2245,7 +2247,7 @@ msgstr "Содержание сахара в углеводах"
 #: nutrition/templates/ingredient/view.html:113
 #: nutrition/templates/ingredient/view.html:123
 msgid "n.A."
-msgstr "не имеется в наличии"
+msgstr "н/д"
 
 #: nutrition/templates/ingredient/view.html:86 nutrition/views/plan.py:281
 msgid "Saturated fat content in fats"
@@ -2257,7 +2259,7 @@ msgstr "Другие"
 
 #: nutrition/templates/ingredient/view.html:108 nutrition/views/plan.py:287
 msgid "Fiber"
-msgstr "Волокно"
+msgstr "Клетчатка"
 
 #: nutrition/templates/ingredient/view.html:118 nutrition/views/plan.py:293
 msgid "Sodium"
@@ -2484,7 +2486,7 @@ msgstr "Улучшите выполнение упражнений"
 
 #: software/templates/about_us.html:82
 msgid "Contribute new exercises, and edit or translate the existing ones."
-msgstr ""
+msgstr "Добавляйте новые упражнения, редактируйте или переводите существующие."
 "Добавляйте новые упражнения, а также редактируйте или переводите "
 "существующие."
 
@@ -2628,7 +2630,7 @@ msgstr "Разработайте еженедельный план тренир�
 
 #: software/templates/features.html:180
 msgid "Set reps and sets, duration, or distance goals for each exercise"
-msgstr ""
+msgstr "Задавайте подходы, повторения, длительность или дистанцию для каждого упражнения"
 "Установите количество повторений и подходов, продолжительность или цель для "
 "каждого упражнения"
 
@@ -2649,13 +2651,13 @@ msgstr "Планируйте свое <span>ежедневное питание<
 
 #: software/templates/features.html:215
 msgid "Fill your week with nutritious meals that help you perform better"
-msgstr ""
+msgstr "Наполните неделю питательными блюдами для лучших результатов"
 "Наполните свою неделю питательными блюдами, которые помогут вам лучше "
 "работать"
 
 #: software/templates/features.html:218
 msgid "Build meals from a database of more than 2 million foods"
-msgstr ""
+msgstr "Составляйте рацион из базы данных более чем 2 миллионов продуктов"
 "Создавайте блюда на основе базы данных из более чем 2 миллионов продуктов"
 
 #: software/templates/features.html:221
@@ -2672,7 +2674,7 @@ msgstr "Следите за <span>своим прогрессом</span>"
 
 #: software/templates/features.html:256
 msgid "Track and annotate everything about your meals and workouts"
-msgstr ""
+msgstr "Отслеживайте и записывайте всё о своём питании и тренировках"
 "Отслеживайте и комментируйте все, что касается вашего питания и тренировок"
 
 #: software/templates/features.html:259
@@ -2689,7 +2691,7 @@ msgstr "Ведите журнал фотографий, чтобы видеть 
 
 #: software/templates/features.html:268
 msgid "Use the calendar view to see past entries"
-msgstr ""
+msgstr "Используйте календарь для просмотра прошлых записей"
 "Используйте режим просмотра календаря, чтобы просмотреть прошлые записи"
 
 #: software/templates/features.html:287
@@ -2759,7 +2761,7 @@ msgstr "Интеграция с вашим собственным приложе
 
 #: software/templates/features.html:402
 msgid "wger offers an open API that you can use for your app."
-msgstr ""
+msgstr "Rep12 предоставляет открытый API для вашего приложения."
 "wger предлагает открытый API, который вы можете использовать для своего "
 "приложения."
 
@@ -2833,7 +2835,7 @@ msgstr "Автор(ы)"
 #| "If you are not the author, enter the name or source here. This is needed "
 #| "for some licenses e.g. the CC-BY-SA."
 msgid "If you are not the author, enter the name or source here."
-msgstr ""
+msgstr "Если вы не являетесь автором, укажите имя или источник здесь."
 "Если вы не являетесь автором, введите имя или источник здесь. Это необходимо "
 "для некоторых лицензий, таких как CC-BY-SA."
 
@@ -4250,8 +4252,6 @@ msgstr "Повторно отправить"
 #~ msgid "Add exercise comment"
 #~ msgstr "Добавить комментарий к упражнению"
 
-#~ msgid "Ingredients"
-#~ msgstr "Ингредиенты"
 
 #~ msgid ""
 #~ "Use the configuration to select in what languages the\n"
@@ -4779,3 +4779,56 @@ msgstr "Повторно отправить"
 
 #~ msgid "Days"
 #~ msgstr "Дни"
+
+msgid "Almost there!"
+msgstr "Почти готово!"
+
+msgid "Confirm email"
+msgstr "Подтвердить email"
+
+msgid ""
+"Your email verification code is listed below. Please enter it in your open "
+"browser window."
+msgstr ""
+"Ваш код подтверждения указан ниже. Введите его в открытом окне браузера."
+
+msgid "Please click the button below to confirm your email address."
+msgstr "Нажмите кнопку ниже, чтобы подтвердить ваш email."
+
+#, python-format
+msgid ""
+"The link is valid for %(expire_hours)s hours (until %(date)s, %(time)s). You "
+"can request a new one from your profile settings."
+msgstr ""
+"Ссылка действительна %(expire_hours)s часов (до %(date)s, %(time)s). Вы "
+"можете запросить новую в настройках профиля."
+
+msgid ""
+"If the button doesn't work, copy and paste this link into your browser:"
+msgstr ""
+"Если кнопка не работает, скопируйте эту ссылку в браузер:"
+
+#, python-format
+msgid ""
+"To confirm this is correct, go to %(activate_url)s"
+msgstr ""
+"Чтобы подтвердить, перейдите по ссылке: %(activate_url)s"
+
+msgid "Команда Rep12"
+msgstr "Команда Rep12"
+
+
+msgid "Filter"
+msgstr "Фильтр"
+
+msgid "Vegan"
+msgstr "Веганское"
+
+msgid "Vegetarian"
+msgstr "Вегетарианское"
+
+msgid "Apply"
+msgstr "Применить"
+
+msgid "Search by ingredient name"
+msgstr "Поиск по названию ингредиента"

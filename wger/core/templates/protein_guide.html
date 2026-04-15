@@ -1,0 +1,210 @@
+{% extends "base.html" %}
+{% load i18n static %}
+
+{% block title %}Гид по белку — REP12{% endblock %}
+
+{% block content %}
+<style>
+.protein-page { max-width: 900px; margin: 0 auto; }
+.protein-page h1 { color: #DCDCDC; font-weight: 800; margin-bottom: 0.3em; }
+.protein-page .subtitle { color: #777; font-size: 1.1rem; margin-bottom: 2rem; }
+.protein-rec {
+    background: #191919; border: 1px solid #2A2A2A; border-radius: 12px;
+    padding: 1.5rem; margin-bottom: 2rem;
+}
+.protein-rec h3 { color: #44E5A3; font-size: 1.2rem; margin-bottom: 0.8rem; }
+.protein-rec .big-num { font-size: 2.5rem; font-weight: 800; color: #DCDCDC; line-height: 1; }
+.protein-rec .unit { color: #777; font-size: 1rem; }
+.protein-rec p { color: #999; margin-top: 0.8rem; font-size: 0.95rem; }
+.protein-table {
+    width: 100%; border-collapse: separate; border-spacing: 0;
+    background: #191919; border-radius: 12px; overflow: hidden;
+}
+.protein-table thead th {
+    background: #1E1E1E; color: #44E5A3; font-weight: 600;
+    padding: 12px 16px; text-align: left; font-size: 0.85rem;
+    text-transform: uppercase; letter-spacing: 0.05em;
+}
+.protein-table tbody td {
+    padding: 12px 16px; color: #DCDCDC; border-top: 1px solid #2A2A2A;
+    font-size: 0.95rem;
+}
+.protein-table tbody tr:hover { background: #1A1A1A; }
+.protein-bar {
+    height: 6px; border-radius: 3px; background: #2A2A2A; position: relative;
+}
+.protein-bar-fill {
+    height: 100%; border-radius: 3px; background: #44E5A3;
+}
+.category-label {
+    display: inline-block; padding: 2px 10px; border-radius: 20px;
+    font-size: 0.75rem; font-weight: 600; color: #0F0F0F;
+}
+.cat-meat { background: #E57373; }
+.cat-fish { background: #4FC3F7; }
+.cat-dairy { background: #FFF176; }
+.cat-plant { background: #81C784; }
+.cat-egg { background: #FFB74D; }
+.tip-box {
+    background: linear-gradient(135deg, #1a2e1f, #191919);
+    border: 1px solid #2A3A2A; border-radius: 12px;
+    padding: 1.2rem 1.5rem; margin-top: 1.5rem;
+}
+.tip-box h5 { color: #44E5A3; font-size: 1rem; margin-bottom: 0.5rem; }
+.tip-box ul { color: #BBB; padding-left: 1.2rem; margin: 0; }
+.tip-box li { margin-bottom: 0.3rem; font-size: 0.9rem; }
+@media (max-width: 576px) {
+    .protein-table { font-size: 0.85rem; }
+    .protein-table thead th, .protein-table tbody td { padding: 8px 10px; }
+    .hide-mobile { display: none; }
+}
+</style>
+
+<div class="protein-page py-4 px-3">
+    <h1>Гид по белку</h1>
+    <p class="subtitle">Топ продуктов с высоким содержанием белка — рекомендации от тренеров REP12</p>
+
+    <div class="protein-rec">
+        <h3>Сколько белка нужно для роста мышц?</h3>
+        <div class="d-flex align-items-baseline gap-2 flex-wrap">
+            <span class="big-num">1.6 — 2.2</span>
+            <span class="unit">г на кг массы тела в день</span>
+        </div>
+        <p>
+            Для набора мышечной массы рекомендуется потреблять 1.6–2.2 г белка на каждый
+            килограмм веса тела. Например, при весе 75 кг — это 120–165 г белка в день.
+            Распределяйте равномерно на 4–5 приёмов пищи.
+        </p>
+    </div>
+
+    <table class="protein-table">
+        <thead>
+            <tr>
+                <th>Продукт</th>
+                <th>Категория</th>
+                <th>Белок / 100 г</th>
+                <th class="hide-mobile">Ккал / 100 г</th>
+                <th class="hide-mobile" style="min-width:100px">Плотность</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Куриная грудка</strong></td>
+                <td><span class="category-label cat-meat">Мясо</span></td>
+                <td>31 г</td>
+                <td class="hide-mobile">165</td>
+                <td class="hide-mobile"><div class="protein-bar"><div class="protein-bar-fill" style="width:95%"></div></div></td>
+            </tr>
+            <tr>
+                <td><strong>Индейка (филе)</strong></td>
+                <td><span class="category-label cat-meat">Мясо</span></td>
+                <td>29 г</td>
+                <td class="hide-mobile">157</td>
+                <td class="hide-mobile"><div class="protein-bar"><div class="protein-bar-fill" style="width:90%"></div></div></td>
+            </tr>
+            <tr>
+                <td><strong>Тунец (консервы)</strong></td>
+                <td><span class="category-label cat-fish">Рыба</span></td>
+                <td>26 г</td>
+                <td class="hide-mobile">116</td>
+                <td class="hide-mobile"><div class="protein-bar"><div class="protein-bar-fill" style="width:92%"></div></div></td>
+            </tr>
+            <tr>
+                <td><strong>Говядина (нежирная)</strong></td>
+                <td><span class="category-label cat-meat">Мясо</span></td>
+                <td>26 г</td>
+                <td class="hide-mobile">187</td>
+                <td class="hide-mobile"><div class="protein-bar"><div class="protein-bar-fill" style="width:78%"></div></div></td>
+            </tr>
+            <tr>
+                <td><strong>Творог 5%</strong></td>
+                <td><span class="category-label cat-dairy">Молочка</span></td>
+                <td>18 г</td>
+                <td class="hide-mobile">121</td>
+                <td class="hide-mobile"><div class="protein-bar"><div class="protein-bar-fill" style="width:75%"></div></div></td>
+            </tr>
+            <tr>
+                <td><strong>Яйцо куриное</strong></td>
+                <td><span class="category-label cat-egg">Яйца</span></td>
+                <td>13 г</td>
+                <td class="hide-mobile">155</td>
+                <td class="hide-mobile"><div class="protein-bar"><div class="protein-bar-fill" style="width:55%"></div></div></td>
+            </tr>
+            <tr>
+                <td><strong>Лосось</strong></td>
+                <td><span class="category-label cat-fish">Рыба</span></td>
+                <td>20 г</td>
+                <td class="hide-mobile">208</td>
+                <td class="hide-mobile"><div class="protein-bar"><div class="protein-bar-fill" style="width:60%"></div></div></td>
+            </tr>
+            <tr>
+                <td><strong>Креветки</strong></td>
+                <td><span class="category-label cat-fish">Рыба</span></td>
+                <td>24 г</td>
+                <td class="hide-mobile">99</td>
+                <td class="hide-mobile"><div class="protein-bar"><div class="protein-bar-fill" style="width:93%"></div></div></td>
+            </tr>
+            <tr>
+                <td><strong>Греческий йогурт</strong></td>
+                <td><span class="category-label cat-dairy">Молочка</span></td>
+                <td>10 г</td>
+                <td class="hide-mobile">59</td>
+                <td class="hide-mobile"><div class="protein-bar"><div class="protein-bar-fill" style="width:70%"></div></div></td>
+            </tr>
+            <tr>
+                <td><strong>Чечевица (варёная)</strong></td>
+                <td><span class="category-label cat-plant">Растительный</span></td>
+                <td>9 г</td>
+                <td class="hide-mobile">116</td>
+                <td class="hide-mobile"><div class="protein-bar"><div class="protein-bar-fill" style="width:45%"></div></div></td>
+            </tr>
+            <tr>
+                <td><strong>Нут (варёный)</strong></td>
+                <td><span class="category-label cat-plant">Растительный</span></td>
+                <td>9 г</td>
+                <td class="hide-mobile">164</td>
+                <td class="hide-mobile"><div class="protein-bar"><div class="protein-bar-fill" style="width:35%"></div></div></td>
+            </tr>
+            <tr>
+                <td><strong>Печень куриная</strong></td>
+                <td><span class="category-label cat-meat">Мясо</span></td>
+                <td>17 г</td>
+                <td class="hide-mobile">119</td>
+                <td class="hide-mobile"><div class="protein-bar"><div class="protein-bar-fill" style="width:72%"></div></div></td>
+            </tr>
+            <tr>
+                <td><strong>Сыр Адыгейский</strong></td>
+                <td><span class="category-label cat-dairy">Молочка</span></td>
+                <td>18 г</td>
+                <td class="hide-mobile">240</td>
+                <td class="hide-mobile"><div class="protein-bar"><div class="protein-bar-fill" style="width:48%"></div></div></td>
+            </tr>
+            <tr>
+                <td><strong>Кальмар</strong></td>
+                <td><span class="category-label cat-fish">Рыба</span></td>
+                <td>18 г</td>
+                <td class="hide-mobile">86</td>
+                <td class="hide-mobile"><div class="protein-bar"><div class="protein-bar-fill" style="width:88%"></div></div></td>
+            </tr>
+            <tr>
+                <td><strong>Гречка (варёная)</strong></td>
+                <td><span class="category-label cat-plant">Растительный</span></td>
+                <td>4 г</td>
+                <td class="hide-mobile">110</td>
+                <td class="hide-mobile"><div class="protein-bar"><div class="protein-bar-fill" style="width:22%"></div></div></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="tip-box">
+        <h5>Советы от тренера</h5>
+        <ul>
+            <li>Ешьте белок при каждом приёме пищи — 30–40 г за раз усваивается лучше всего</li>
+            <li>После тренировки — окно 1–2 часа для белкового приёма (творог, яйца, курица)</li>
+            <li>Комбинируйте животный и растительный белок для полного аминокислотного профиля</li>
+            <li>Не забывайте про воду — на каждый грамм белка нужно ~1.5 мл воды</li>
+            <li>Казеин (творог) перед сном — медленный белок работает пока вы спите</li>
+        </ul>
+    </div>
+</div>
+{% endblock %}

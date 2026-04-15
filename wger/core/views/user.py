@@ -87,9 +87,11 @@ from wger.core.forms import (
     UserPersonalInformationForm,
     UserPreferencesForm,
 )
+from django.contrib.auth.models import Permission
 from wger.gym.models import (
     AdminUserNote,
     Contract,
+    Gym,
     GymUserConfig,
 )
 from wger.manager.models import (
@@ -269,6 +271,31 @@ def registration(request):
                 config.save()
 
             user.userprofile.save()
+
+            # If user registered as trainer, create gym and assign permissions
+            if form.cleaned_data.get('is_trainer'):
+                gym = Gym(name=f'{username}')
+                gym.save()
+                user.userprofile.gym = gym
+                user.userprofile.save()
+
+                # Assign trainer + manage_gym permissions
+                perm_trainer = Permission.objects.get(codename='gym_trainer')
+                perm_manage = Permission.objects.get(codename='manage_gym')
+                perm_add_note = Permission.objects.get(codename='add_adminusernote')
+                perm_change_note = Permission.objects.get(codename='change_adminusernote')
+                perm_delete_note = Permission.objects.get(codename='delete_adminusernote')
+                user.user_permissions.add(
+                    perm_trainer, perm_manage,
+                    perm_add_note, perm_change_note, perm_delete_note,
+                )
+
+                # Create gym user config
+                gym_user_config = GymUserConfig()
+                gym_user_config.gym = gym
+                gym_user_config.user = user
+                gym_user_config.save()
+
             user = authenticate(request=request, username=username, password=password)
 
             # Log the user in
@@ -285,7 +312,7 @@ def registration(request):
 
             # Redirect to the dashboard
             messages.success(request, _('You were successfully registered'))
-            return HttpResponseRedirect(reverse('core:dashboard'))
+            return HttpResponseRedirect(reverse('core:welcome'))
     else:
         form = FormClass()
 

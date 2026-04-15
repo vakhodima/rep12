@@ -1,53 +1,45 @@
 {% extends "base_wide.html" %}
 {% load i18n static wger_extras %}
 
-{#         #}
-{# Title #}
-{#         #}
-{% block title %}{% translate "Trophies" %}{% endblock %}
+{% block title %}Достижения{% endblock %}
 
-
-{#         #}
-{# Content #}
-{#         #}
 {% block content %}
-<p>All trophies currently in the system</p>
+<h2 class="mb-4">Достижения</h2>
 
-<div class="row row-cols-sm-2 row-cols-md-4 row-cols-lg-6 g-4">
-{% for trophy in trophy_list %}
+{% if user_trophies %}
+<h5 class="text-success mb-3"><i class="fas fa-trophy"></i> Получены</h5>
+<div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-3 mb-5">
+{% for ut in user_trophies %}
     <div class="col">
-        <div class="card h-100" style="min-width: 12rem;">
-            <img src="{% static trophy.image_rel_path %}" class="card-img-top" alt="..." style="padding: 1rem;">
-            <div class="card-body">
-                <h5 class="card-title">
-                    {%  if not trophy.is_active %}<s>{% endif %}
-                    {{ trophy.name }}
-                    {%  if not trophy.is_active %}</s>{% endif %}
-                </h5>
-                <p class="card-text">
-                    {%  if not trophy.is_active %}<s>{% endif %}
-                    {{ trophy.description }}
-                    {%  if not trophy.is_active %}</s>{% endif %}
-                </p>
+        <div class="r12-trophy r12-trophy--earned">
+            <div class="r12-trophy__icon">
+                <img src="{% static ut.trophy.image_rel_path %}" alt="{{ ut.trophy.name }}">
             </div>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">Type: {{ trophy.trophy_type }}</li>
-                <li class="list-group-item">Hidden: {{ trophy.is_hidden }}</li>
-                <li class="list-group-item">Progressive: {{ trophy.is_progressive }}</li>
-            </ul>
-            <div class="card-footer text-body-secondary">
-                Awarded {{ trophy.user_trophies.count }} times
-            </div>
-
+            <div class="r12-trophy__name">{{ ut.trophy.name }}</div>
+            <div class="r12-trophy__desc">{{ ut.trophy.description }}</div>
+            <div class="r12-trophy__date">{{ ut.earned_at|date:"d.m.Y" }}</div>
         </div>
     </div>
 {% endfor %}
 </div>
-{% endblock %}
+{% endif %}
 
-
-{#         #}
-{# Options #}
-{#         #}
-{% block options %}
+<h5 class="text-muted mb-3"><i class="fas fa-lock"></i> Предстоит открыть</h5>
+<div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-3">
+{% for trophy in locked_trophies %}
+    <div class="col">
+        <div class="r12-trophy r12-trophy--locked">
+            <div class="r12-trophy__icon">
+                <img src="{% static trophy.image_rel_path %}" alt="{{ trophy.name }}">
+            </div>
+            <div class="r12-trophy__name">{{ trophy.name }}</div>
+            <div class="r12-trophy__desc">{{ trophy.description }}</div>
+        </div>
+    </div>
+{% empty %}
+    <div class="col-12">
+        <p class="text-success">Все достижения разблокированы!</p>
+    </div>
+{% endfor %}
+</div>
 {% endblock %}

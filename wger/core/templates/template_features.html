@@ -1,30 +1,18 @@
 <!DOCTYPE html>
-<!--
-    This file is part of wger Workout Manager
-
-    wger is free software: you can redistribute it and/or modify
-    it under the terms of the GNU Affero General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    wger is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU Affero General Public License for more details.
-
-    You should have received a copy of the GNU Affero General Public License
-    along with Workout Manager. If not, see <http://www.gnu.org/licenses/>.
--->
+<!-- Rep12 -->
 
 
 {% load i18n static %}
-<html lang="{{ language.short_name }}">
+<html lang="{{ i18n_language.code }}">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta charset="utf-8">
-    <meta name="author" content="wger team">
+    <meta name="author" content="Rep12">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="{% static 'images/favicon.png' %}" type="image/png">
+    <link rel="manifest" href="{% static 'manifest.json' %}">
+    <meta name="theme-color" content="#0F0F0F">
+    <meta name="description" content="REP12 — платформа для фитнес-тренеров и их клиентов. Тренировки, питание, прогресс.">
 
     <!-- OpenGraph -->
     {% block opengraph %}
@@ -43,7 +31,7 @@
     <script src="{% static 'node/@popperjs/core/dist/umd/popper.js' %}"></script>
     <script src="{% static 'js/language.js' %}"></script>
 
-    <title>wger Workout Manager - {% translate "Features" %}</title>
+    <title>REP12 — Фитнес-платформа для тренеров и клиентов</title>
 </head>
 
 <body>

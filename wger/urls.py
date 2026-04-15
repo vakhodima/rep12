@@ -291,6 +291,7 @@ urlpatterns = i18n_patterns(
         {'sitemaps': sitemaps},
         name='django.contrib.sitemaps.views.sitemap',
     ),
+    prefix_default_language=False,
 )
 
 #

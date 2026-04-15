@@ -17,7 +17,7 @@ $(document).ready(function() {
 {% block breadcrumbs %}
     {{ block.super }}
 
-    {% breadcrumb "Ingredients" "nutrition:ingredient:list" %}
+    {% breadcrumb _("Ingredients") "nutrition:ingredient:list" %}
     {% breadcrumb ingredient ingredient.get_absolute_url %}
 {% endblock %}
 

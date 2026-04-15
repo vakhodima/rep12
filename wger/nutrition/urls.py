@@ -136,7 +136,7 @@ patterns_unit_ingredient = [
 patterns_bmi = [
     path(
         '',
-        ReactView.as_view(login_required=True),
+        ReactView.as_view(login_required=False),
         name='view',
     ),
 ]

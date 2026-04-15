@@ -23,6 +23,7 @@ from .contract import (
 )
 from .gym import Gym
 from .gym_config import GymConfig
+from .push_subscription import PushSubscription
 from .user_config import (
     GymAdminConfig,
     GymUserConfig,

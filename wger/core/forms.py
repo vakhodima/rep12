@@ -312,18 +312,26 @@ class RegistrationForm(UserCreationForm, UserEmailForm):
             ButtonHolder(Submit('submitBtn', _('Register'), css_class='btn-success btn-block')),
         )
 
-
 class RegistrationFormNoCaptcha(UserCreationForm, UserEmailForm):
     """
-    Registration form without CAPTCHA field
+    Registration form — username + email + password + trainer toggle
     """
+
+    is_trainer = forms.BooleanField(
+        label=gettext_lazy('Я тренер'),
+        required=False,
+        help_text=gettext_lazy('Отметьте, если вы фитнес-тренер и хотите вести клиентов'),
+    )
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        # Apply custom password widgets
         self.fields['password1'].widget = PasswordInputWithToggle()
         self.fields['password2'].widget = PasswordInputWithToggle()
+        self.fields['email'].required = True
+        self.fields['email'].help_text = gettext_lazy(
+            'На этот адрес придёт подтверждение'
+        )
 
         self.helper = FormHelper()
         self.helper.form_class = 'wger-form'
@@ -335,6 +343,7 @@ class RegistrationFormNoCaptcha(UserCreationForm, UserEmailForm):
                 Column('password2', css_class='col-md-6 col-12'),
                 css_class='form-row',
             ),
+            'is_trainer',
             ButtonHolder(
                 Submit('submit', _('Register'), css_class='btn-success col-sm-6 col-12'),
                 css_class='text-center',

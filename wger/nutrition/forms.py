@@ -22,6 +22,7 @@ from datetime import datetime
 from django import forms
 from django.forms import BooleanField
 from django.utils.translation import (
+    pgettext_lazy,
     gettext as _,
     gettext_lazy,
 )
@@ -55,7 +56,7 @@ class IngredientWeightUnitChoiceField(forms.ModelChoiceField):
     """
 
     def label_from_instance(self, obj):
-        return f'{obj.amount} {obj.unit.name} = {obj.gram}g'
+        return f'{obj.amount} {obj.unit.name} = {obj.gram}' + pgettext_lazy('weight unit, i.e. grams', 'g')
 
 
 class UnitChooserForm(forms.Form):
@@ -69,7 +70,7 @@ class UnitChooserForm(forms.Form):
     unit = forms.ModelChoiceField(
         queryset=IngredientWeightUnit.objects.none(),
         label=gettext_lazy('Unit'),
-        empty_label='g',
+        empty_label=pgettext_lazy('weight unit, i.e. grams', 'g'),
         required=False,
     )
 

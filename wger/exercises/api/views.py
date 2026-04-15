@@ -39,6 +39,7 @@ from drf_spectacular.utils import (
     inline_serializer,
 )
 from easy_thumbnails.alias import aliases
+from easy_thumbnails.engine import NoSourceGenerator
 from easy_thumbnails.exceptions import InvalidImageFormatError
 from easy_thumbnails.files import get_thumbnailer
 from rest_framework import viewsets
@@ -308,7 +309,7 @@ def search(request):
                     f'InvalidImageFormatError while processing thumbnails for '
                     f'image ID {image_obj.id}: {e}'
                 )
-            except OSError as e:
+            except (OSError, NoSourceGenerator) as e:
                 logger.warning(
                     f'OSError while processing thumbnails for image ID {image_obj.id}: {e}'
                 )
