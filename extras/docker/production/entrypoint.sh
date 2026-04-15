@@ -30,6 +30,11 @@ then
     python3 manage.py collectstatic --no-input $clear_static
 fi
 
+# REP12: copy sw.js to static root for push notifications
+if [ -f /home/wger/src/wger/core/static/sw.js ]; then
+    cp /home/wger/src/wger/core/static/sw.js /home/wger/static/sw.js 2>/dev/null || true
+fi
+
 # Perform database migrations
 if [[ "$DJANGO_PERFORM_MIGRATIONS" == "True" ]];
 then

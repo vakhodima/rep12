@@ -66,6 +66,8 @@ dependencies = [
     "requests~=2.33.0",
     "tqdm~=4.67.1",
     "tzdata~=2026.1",
+    "pywebpush~=2.0.1",
+    "livekit-api~=0.7.1",
 ]
 
 [dependency-groups]
@@ -87,12 +89,9 @@ docker = [
 
 
 [project.urls]
-Homepage = "https://wger.de/"
-Documentation = "https://wger.readthedocs.io"
-Repository = "https://github.com/wger-project/wger"
-Issues = "https://github.com/wger-project/wger/issues"
-Changelog = "https://wger.readthedocs.io/en/latest/changelog.html"
-Funding = "https://buymeacoffee.com/wger"
+Homepage = "https://rep12.ru/"
+Repository = "https://github.com/vakhodima/rep12"
+Issues = "https://github.com/vakhodima/rep12/issues"
 
 
 [project.scripts]
