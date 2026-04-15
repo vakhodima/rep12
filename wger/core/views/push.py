@@ -5,12 +5,14 @@ import os
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST
+from django_ratelimit.decorators import ratelimit
 
 logger = logging.getLogger(__name__)
 
 
 @login_required
 @require_POST
+@ratelimit(key='user', rate='10/m', method='POST')
 def subscribe(request):
     try:
         data = json.loads(request.body)
@@ -36,6 +38,7 @@ def subscribe(request):
 
 @login_required
 @require_POST
+@ratelimit(key='user', rate='10/m', method='POST')
 def unsubscribe(request):
     try:
         data = json.loads(request.body)

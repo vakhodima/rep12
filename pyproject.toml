@@ -68,6 +68,7 @@ dependencies = [
     "tzdata~=2026.1",
     "pywebpush~=2.0.1",
     "livekit-api~=0.7.1",
+    "django-ratelimit~=4.1.0",
 ]
 
 [dependency-groups]

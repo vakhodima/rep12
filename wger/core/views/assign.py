@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 from django.db import transaction
 from django.http import HttpResponseForbidden
 from django.shortcuts import get_object_or_404, render
+from django_ratelimit.decorators import ratelimit
 
 from wger.manager.models import Routine
 
@@ -32,6 +33,7 @@ def _check_trainer(request):
 
 
 @login_required
+@ratelimit(key='user', rate='20/m', method='POST')
 def assign_routine(request, routine_pk):
     """Select client -> assign routine to them"""
     gym, err = _check_trainer(request)
@@ -72,6 +74,7 @@ def assign_routine(request, routine_pk):
 
 
 @login_required
+@ratelimit(key='user', rate='20/m', method='POST')
 def assign_to_client(request, client_pk):
     """Select routine -> assign to this client"""
     gym, err = _check_trainer(request)
