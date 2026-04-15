@@ -449,10 +449,10 @@ WGER_SETTINGS = {
     'CACHE_API_EXERCISES_CELERY': False,
     'CACHE_API_EXERCISES_CELERY_FORCE_UPDATE': False,
     'TWITTER': False,
-    'MASTODON': 'https://fosstodon.org/@wger',
+    'MASTODON': False,
     'USE_CELERY': False,
     'USE_RECAPTCHA': False,
-    'WGER_INSTANCE': 'https://wger.de',
+    'WGER_INSTANCE': 'https://rep12.ru',
     # Trophy system settings
     'TROPHIES_ENABLED': True,
     'TROPHIES_INACTIVE_USER_DAYS': 30,  # Days of inactivity before skipping trophy evaluation

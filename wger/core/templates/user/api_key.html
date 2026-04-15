@@ -7,7 +7,7 @@
 {% block content %}
     <p>
         Please use JWT authentication if possible. More details in the
-        <a href="https://wger.readthedocs.io/en/latest/">online documentation</a>.
+        <a href="https://github.com/vakhodima/rep12">online documentation</a>.
     </p>
 
     <div class="card mb-4 {% if token %}text-white bg-success{% else %}bg-light{% endif %}">
@@ -30,7 +30,7 @@
 
     <p>Example with curl:</p>
     <pre>
-curl -X GET https://wger.de/api/v2/routine/ \
+curl -X GET https://rep12.ru/api/v2/routine/ \
      -H 'Authorization: Token {% if token %}{{ token.key }}{% else %}1234567890abcde...{% endif %}'
 </pre>
 

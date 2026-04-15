@@ -58,7 +58,7 @@ def get_calendar():
     :return: Calendar
     """
     calendar = Calendar()
-    calendar.add('prodid', '-//wger Workout Manager//wger.de//')
+    calendar.add('prodid', '-//REP12 Fitness Platform//rep12.ru//')
     calendar.add('version', get_version())
     return calendar
 

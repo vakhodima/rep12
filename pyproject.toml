@@ -7,9 +7,9 @@ name = "wger"
 dynamic = ["version", ]
 authors = [
     { name = "Roland Geider", email = "roland@geider.net" },
-    { name = "wger team", email = "hello@wger.de" },
+    { name = "REP12", email = "info@rep12.ru" },
 ]
-description = "FLOSS workout, fitness and weight manager/tracker"
+description = "REP12 — fitness platform for trainers and clients (wger fork)"
 readme = "README.md"
 requires-python = ">=3.12"
 classifiers = [

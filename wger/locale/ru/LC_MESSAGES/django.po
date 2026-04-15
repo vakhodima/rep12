@@ -509,7 +509,7 @@ msgstr "Срок действия токена истекает через %(tim
 #: core/templates/email_verification/email_body_html.tpl:14
 #: core/templates/email_verification/email_body_txt.tpl:8
 msgid "the wger Team"
-msgstr "Команда wger"
+msgstr "Команда REP12"
 
 #: core/templates/email_verification/email_body_txt.tpl:4
 #, python-format
@@ -2604,7 +2604,7 @@ msgstr "Начать"
 
 #: software/templates/features.html:133
 msgid "people <br> using wger"
-msgstr "люди<br> использующие wger"
+msgstr "люди<br> используют REP12"
 
 #: software/templates/features.html:137
 msgid "exercises <br> for workout creation"
@@ -2721,7 +2721,7 @@ msgstr ""
 
 #: software/templates/features.html:322
 msgid "Pitch in and help make wger even better!"
-msgstr "Присоединяйтесь и помогите сделать wger еще лучше!"
+msgstr "Присоединяйтесь и помогите сделать REP12 ещё лучше!"
 
 #: software/templates/features.html:331
 #, fuzzy

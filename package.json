@@ -1,12 +1,12 @@
 {
-  "name": "wger",
-  "version": "2.5-alpha1",
-  "description": "Self hosted FLOSS fitness/workout and weight tracker",
-  "repository": "github:wger-project/wger",
-  "author": "wger team <hello@wger.de>",
+  "name": "rep12",
+  "version": "1.0.0",
+  "description": "REP12 — fitness platform for trainers and clients",
+  "repository": "github:vakhodima/rep12",
+  "author": "REP12 <info@rep12.ru>",
   "license": "AGPL-3.0",
   "bugs": {
-    "url": "https://github.com/wger-project/wger/issues"
+    "url": "https://github.com/vakhodima/rep12/issues"
   },
   "homepage": "https://github.com/wger-project/wger",
   "dependencies": {
