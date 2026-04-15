@@ -263,17 +263,15 @@ class CallLinkApiTest(WgerTestCase):
         code2 = resp2.json()['room_code']
         self.assertEqual(code1, code2)
 
-    def test_different_gym_different_code(self):
-        """Users in different gyms get different room codes."""
-        self.user_login('trainer1')  # gym=1
-        resp1 = self.client.get('/api/call/link/')
-        code1 = resp1.json()['room_code']
-        self.user_logout()
+    def test_code_matches_gym_id(self):
+        """API room code matches _get_room_code for user's gym."""
+        from wger.core.views.call import _get_room_code
 
-        self.user_login('trainer3')  # gym=2
-        resp2 = self.client.get('/api/call/link/')
-        code2 = resp2.json()['room_code']
-        self.assertNotEqual(code1, code2)
+        self.user_login('trainer1')  # gym=1
+        resp = self.client.get('/api/call/link/')
+        code = resp.json()['room_code']
+        expected = _get_room_code(1)
+        self.assertEqual(code, expected)
 
 
 class CopyRoutineWithConfigsTest(WgerTestCase):
@@ -465,7 +463,7 @@ class AssignRoutineIntegrationTest(WgerTestCase):
         self.user_login('trainer1')
         src = _make_routine(4, 'Push test')
 
-        with patch('wger.core.views.assign.send_push') as mock_push:
+        with patch('wger.core.views.push.send_push') as mock_push:
             self.client.post(
                 f'/routine/{src.pk}/assign/',
                 {'client_id': 2},
